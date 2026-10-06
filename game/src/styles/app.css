@@ -56,3 +56,4 @@ kbd { font-family: var(--sans); font-size: .65rem; opacity: .7; border: 1px soli
 .chip { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: .55rem .75rem; font-size: .88rem; cursor: grab; touch-action: none; user-select: none; }
 .chip.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
 .chip.drag { cursor: grabbing; box-shadow: 0 6px 18px rgba(0,0,0,.2); }
+.order-axis { display: flex; justify-content: space-between; font-family: var(--sans); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .4rem; }
