@@ -23,7 +23,14 @@ export type TripView = {
   bufferMin: number;
   leaveAt: string; // ISO
   route: Route;
-  live: { busWaitMin: number | null; forecast: string; umbrella: boolean };
+  live: {
+    busWaitMin: number | null;
+    forecast: string;
+    forecastAt: string; // ISO: the leave time the forecast is for
+    forecastArea: string | null;
+    forecastSource: "two-hour" | "24-hour" | "none" | "unavailable";
+    umbrella: boolean;
+  };
 };
 
 // Body sent to POST /api/trip.

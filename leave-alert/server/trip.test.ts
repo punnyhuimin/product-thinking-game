@@ -77,11 +77,64 @@ test("LTA failing: scheduled wait is used", async () => {
   assert.equal(s.plan.totalMin, 41);
 });
 
-test("weather fetch failing: Unavailable forecast, no umbrella", async () => {
+test("2-hour feed failing: the 24-hour forecast covers the leave time", async () => {
   fake = installFakeFetch({ twoHr: "fail", lta: "fail" });
   const s = await checkTrip(trip, "key", now);
-  assert.equal(s.context.forecast, "Unavailable");
+  assert.equal(s.context.forecast, "Partly Cloudy");
+  assert.equal(s.context.forecastSource, "24-hour");
   assert.equal(s.context.umbrella, false);
-  assert.equal(s.plan.umbrella, false);
+  assert.equal(s.plan.totalMin, 41);
+});
+
+const arriveAt = (arriveBy: string): ActiveTrip => ({ ...trip, arriveBy });
+
+test("all weather feeds failing: Forecast unavailable, not wet", async () => {
+  fake = installFakeFetch({ twoHr: "fail", rainfall: "fail", twentyFourHr: "fail", lta: "fail" });
+  const s = await checkTrip(trip, "key", now);
+  assert.equal(s.context.forecast, "Forecast unavailable");
+  assert.equal(s.context.forecastSource, "unavailable");
+  assert.equal(s.context.umbrella, false);
+  assert.equal(s.plan.totalMin, 41);
+});
+
+test("24-hour feed failing keeps the usable 2-hour forecast", async () => {
+  fake = installFakeFetch({ twoHr: twoHrForecast("Showers"), twentyFourHr: "fail", lta: "fail" });
+  const s = await checkTrip(trip, "key", now);
+  assert.equal(s.context.forecastSource, "two-hour");
+  assert.equal(s.context.forecastArea, "Bishan");
+  assert.equal(s.context.umbrella, true);
+});
+
+test("forecast is labelled with the leave time", async () => {
+  fake = installFakeFetch({ lta: "fail" });
+  const s = await checkTrip(trip, "key", now);
+  assert.equal(s.context.forecastSource, "two-hour");
+  assert.equal(s.context.forecastAt, s.plan.leaveAt.getTime());
+});
+
+test("leave time beyond the 2-hour window: dry 24-hour period, rain now is ignored", async () => {
+  fake = installFakeFetch({ twoHr: twoHrForecast("Showers"), rainfall: rainfall(2), lta: "fail" });
+  const s = await checkTrip(arriveAt("2026-10-07T10:30:00+08:00"), "key", now); // leave 09:49
+  assert.equal(s.context.forecastSource, "24-hour");
+  assert.equal(s.context.forecast, "Partly Cloudy");
+  assert.equal(s.context.forecastArea, "central");
+  assert.equal(s.context.umbrella, false);
+  assert.equal(s.plan.totalMin, 41);
+});
+
+test("wet 24-hour forecast makes the leave time earlier by the rain walking factor", async () => {
+  fake = installFakeFetch({ lta: "fail" });
+  const s = await checkTrip(arriveAt("2026-10-07T13:00:00+08:00"), "key", now);
+  assert.equal(s.context.forecast, "Thundery Showers");
+  assert.equal(s.context.umbrella, true);
+  assert.equal(s.plan.totalMin, Math.ceil(5 * RAIN_WALK_FACTOR + 6 + 20 + 10));
+});
+
+test("leave time beyond both forecasts: not out yet, no umbrella", async () => {
+  fake = installFakeFetch({ rainfall: rainfall(2), lta: "fail" });
+  const s = await checkTrip(arriveAt("2026-10-08T09:00:00+08:00"), "key", now);
+  assert.equal(s.context.forecast, "Forecast not out yet");
+  assert.equal(s.context.forecastSource, "none");
+  assert.equal(s.context.umbrella, false);
   assert.equal(s.plan.totalMin, 41);
 });

@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { createServer, type IncomingMessage } from "node:http";
 import { createBot } from "./bot.ts";
-import { formatAlert, HEADS_UP_MIN, hhmm, nextAlert, record, type Sent } from "./alerts.ts";
+import { formatAlert, HEADS_UP_MIN, hhmm, nextAlert, record, weatherLine, type Sent } from "./alerts.ts";
 import { getToken, route, search } from "./onemap.ts";
 import { staticMapUrl } from "./staticMap.ts";
 import { answerCallback, editMessage, getUpdates, sendMessage, sendPhoto, setWebhook, type Update } from "./telegram.ts";
@@ -65,6 +65,7 @@ async function saveTrip(body: unknown) {
   const caption = `Trip set: ${t.from.label} to ${t.to.label}, arrive by ${hhmm(Date.parse(t.arriveBy))}.\n` +
     `Leave around ${hhmm(snap.plan.leaveAt.getTime())} (${r.totalMin} min journey). ` +
     `I'll message you ${HEADS_UP_MIN} min before.\n` +
+    `${weatherLine(snap.context.forecast, snap.context.forecastAt, snap.context.umbrella)}\n` +
     `Route: ${snap.context.mapsUrl}`;
   await sendPhoto(BOT_TOKEN, id, staticMapUrl(r, t.from, t.to), caption)
     .catch((e) => (console.error("map photo failed:", e.message), sendMessage(BOT_TOKEN, id, caption)));
