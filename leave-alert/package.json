@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "server": "node --env-file=.env --experimental-strip-types --no-warnings server/index.ts",
+    "start": "node --experimental-strip-types --no-warnings server/index.ts",
     "test":"node --experimental-strip-types --test server/*.test.ts"
   }
 }

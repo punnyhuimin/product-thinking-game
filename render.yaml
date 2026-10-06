@@ -1,0 +1,33 @@
+# Render Blueprint for the leave-alert backend (leave-alert/server).
+# The web app is served separately from GitHub Pages at
+# https://punnyhuimin.github.io/product-thinking-game/.
+services:
+  - type: web
+    name: leave-alert
+    runtime: node
+    # Free instances sleep after ~15 min without HTTP traffic, which pauses the
+    # alert polling loop. Switch to "starter" for alerts you can rely on.
+    plan: free
+    region: singapore
+    rootDir: leave-alert
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    buildFilter:
+      paths:
+        - leave-alert/server/**
+        - leave-alert/package.json
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: ALLOWED_ORIGIN
+        value: https://punnyhuimin.github.io
+      - key: LTA_ACCOUNT_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: ONEMAP_EMAIL
+        sync: false
+      - key: ONEMAP_PASSWORD
+        sync: false

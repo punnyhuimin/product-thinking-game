@@ -10,6 +10,8 @@ const POLL_MS = Number(process.env.POLL_SECONDS ?? 60) * 1000;
 const LTA_KEY = process.env.LTA_ACCOUNT_KEY ?? "";
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN ?? "";
 const ONEMAP = { token: process.env.ONEMAP_TOKEN, email: process.env.ONEMAP_EMAIL, password: process.env.ONEMAP_PASSWORD };
+// The web app's origin when it is hosted separately (e.g. GitHub Pages); unset for local dev.
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "";
 if (!LTA_KEY || !BOT_TOKEN) throw new Error("Set LTA_ACCOUNT_KEY and TELEGRAM_BOT_TOKEN in .env");
 
 // v1 tracks one trip at a time, in memory.
@@ -56,7 +58,8 @@ async function saveTrip(body: unknown) {
   [trip, sent, last, lastError] = [active, {}, snap, null];
   const caption = `Trip set: ${t.from.label} to ${t.to.label}, arrive by ${hhmm(Date.parse(t.arriveBy))}.\n` +
     `Leave around ${hhmm(snap.plan.leaveAt.getTime())} (${r.totalMin} min journey). ` +
-    `I'll message you ${HEADS_UP_MIN} min before.`;
+    `I'll message you ${HEADS_UP_MIN} min before.\n` +
+    `Route: ${snap.context.mapsUrl}`;
   await sendPhoto(BOT_TOKEN, id, staticMapUrl(r, t.from, t.to), caption)
     .catch((e) => (console.error("map photo failed:", e.message), sendMessage(BOT_TOKEN, id, caption)));
   await tick(); // sends a heads-up straight away if leave time is already close
@@ -74,7 +77,14 @@ createServer(async (req, res) => {
     res.writeHead(status, { "content-type": "application/json" });
     res.end(JSON.stringify(body));
   };
+  if (ALLOWED_ORIGIN) {
+    res.setHeader("access-control-allow-origin", ALLOWED_ORIGIN);
+    res.setHeader("access-control-allow-headers", "content-type");
+    res.setHeader("vary", "origin");
+  }
+  if (req.method === "OPTIONS") return void res.writeHead(204).end();
   const url = new URL(req.url ?? "/", "http://localhost");
+  if (url.pathname === "/healthz") return reply(200, { ok: true });
   try {
     if (url.pathname === "/api/search" && req.method === "GET") {
       const q = url.searchParams.get("q")?.trim() ?? "";

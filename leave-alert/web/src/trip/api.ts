@@ -3,10 +3,13 @@ import type { Place, TripPayload, TripView } from "./types";
 // "offline": no backend answered. "error": backend answered but refused, with its reason.
 export type ApiResult<T> = { kind: "ok"; data: T } | { kind: "offline" } | { kind: "error"; message: string };
 
+// Empty in dev (Vite proxies /api); the deployed backend's origin in production builds.
+const API_BASE = (import.meta.env.VITE_API_BASE ?? "").replace(/\/$/, "");
+
 async function request<T>(url: string, init?: RequestInit): Promise<ApiResult<T>> {
   let res: Response;
   try {
-    res = await fetch(url, init);
+    res = await fetch(API_BASE + url, init);
   } catch {
     return { kind: "offline" };
   }
