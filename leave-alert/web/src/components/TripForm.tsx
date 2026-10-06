@@ -25,12 +25,12 @@ export function TripForm({ values, errors, busy, onChange, onSubmit }: Props) {
         <legend>Your journey</legend>
         <Field id="from" label="From" hint={values.from?.address ?? SEARCH_HINT} error={errors.from}>
           {(c) => (
-            <PlaceSearch control={c} value={values.from} placeholder="e.g. 266439" onPick={(p) => onChange("from", p)} />
+            <PlaceSearch control={c} value={values.from} placeholder="e.g. Orchard MRT" onPick={(p) => onChange("from", p)} />
           )}
         </Field>
         <Field id="to" label="To" hint={values.to?.address ?? SEARCH_HINT} error={errors.to}>
           {(c) => (
-            <PlaceSearch control={c} value={values.to} placeholder="e.g. Hwa Chong Institution" onPick={(p) => onChange("to", p)} />
+            <PlaceSearch control={c} value={values.to} placeholder="e.g. Tampines Mall" onPick={(p) => onChange("to", p)} />
           )}
         </Field>
       </fieldset>
