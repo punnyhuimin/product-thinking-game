@@ -1,3 +1,4 @@
+import { DEFAULT_OUTFIT, type Outfit, type Slot } from "../data/wardrobe";
 import { createContext, useContext, useEffect, useReducer, type Dispatch, type ReactNode } from "react";
 
 export const MAX_HEARTS = 5;
@@ -5,6 +6,8 @@ const KEY = "product-officer-v1";
 
 export interface GameState {
   xp: number;
+  peakXp: number; // highest XP reached, so hints never re-lock wardrobe items
+  outfit: Outfit;
   hearts: number;
   completed: Record<number, number>; // level id -> stars (1-3)
   recallDone: Record<number, boolean>;
@@ -13,6 +16,7 @@ export interface GameState {
 
 export type Action =
   | { type: "xp"; amount: number }
+  | { type: "wear"; slot: Slot; item: string }
   | { type: "lose-heart" }
   | { type: "refill-hearts" }
   | { type: "complete"; level: number; stars: number }
@@ -20,11 +24,15 @@ export type Action =
   | { type: "puzzle-done"; id: string; stars: number }
   | { type: "reset" };
 
-const initial: GameState = { xp: 0, hearts: MAX_HEARTS, completed: {}, recallDone: {}, puzzles: {} };
+const initial: GameState = { xp: 0, peakXp: 0, outfit: DEFAULT_OUTFIT, hearts: MAX_HEARTS, completed: {}, recallDone: {}, puzzles: {} };
 
 function reducer(s: GameState, a: Action): GameState {
   switch (a.type) {
-    case "xp": return { ...s, xp: Math.max(0, s.xp + a.amount) };
+    case "xp": {
+      const xp = Math.max(0, s.xp + a.amount);
+      return { ...s, xp, peakXp: Math.max(s.peakXp ?? 0, xp) };
+    }
+    case "wear": return { ...s, outfit: { ...DEFAULT_OUTFIT, ...s.outfit, [a.slot]: a.item } };
     case "lose-heart": return { ...s, hearts: Math.max(0, s.hearts - 1) };
     case "refill-hearts": return { ...s, hearts: MAX_HEARTS };
     case "complete":

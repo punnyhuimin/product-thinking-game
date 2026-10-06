@@ -4,6 +4,7 @@ import { RECALL } from "../data/recall";
 import { useGame } from "../state/store";
 import { TopBar } from "../components/TopBar";
 import { Recall } from "./Recall";
+import { LevelProgress } from "../components/LevelProgress";
 
 export interface LevelProps {
   /** Report a wrong attempt: costs a heart. */
@@ -23,6 +24,7 @@ export function LevelShell({ id, Level, onExit }: { id: number; Level: Component
   const [phase, setPhase] = useState<Phase>(RECALL[id] ? "recall" : "play");
   const [attempt, setAttempt] = useState(0);
   const mistakes = useRef(0);
+  const [done, setDone] = useState(0);
 
   const stars = mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1;
 
@@ -31,15 +33,20 @@ export function LevelShell({ id, Level, onExit }: { id: number; Level: Component
     dispatch({ type: "lose-heart" });
     if (state.hearts <= 1) setPhase("lost");
   };
-  const onCorrect = () => dispatch({ type: "xp", amount: 10 });
+  const onCorrect = () => {
+    setDone((d) => d + 1);
+    dispatch({ type: "xp", amount: 10 });
+  };
   const onFinish = () => {
     dispatch({ type: "complete", level: id, stars: mistakes.current === 0 ? 3 : mistakes.current <= 2 ? 2 : 1 });
     dispatch({ type: "xp", amount: 20 });
+    setDone(meta.steps);
     setPhase("won");
   };
   const retry = () => {
     mistakes.current = 0;
     dispatch({ type: "refill-hearts" });
+    setDone(0);
     setAttempt(attempt + 1);
     setPhase("play");
   };
@@ -49,6 +56,7 @@ export function LevelShell({ id, Level, onExit }: { id: number; Level: Component
       <TopBar onHome={onExit} />
       <p className="kicker">{meta.guide} · Level {id}</p>
       <h1>{meta.title}</h1>
+      {(phase === "play" || phase === "won") && <LevelProgress done={Math.min(done, meta.steps)} total={meta.steps} />}
       {phase === "recall" && <Recall level={id} onDone={() => setPhase("play")} />}
       {phase === "play" && <Level key={attempt} onMistake={onMistake} onCorrect={onCorrect} onFinish={onFinish} />}
       {phase === "lost" && (

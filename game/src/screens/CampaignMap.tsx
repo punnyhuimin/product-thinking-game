@@ -1,6 +1,7 @@
 import { LEVELS } from "../data/levels";
 import { useGame } from "../state/store";
 import { TopBar } from "../components/TopBar";
+import { Wardrobe } from "../components/Wardrobe";
 import { Results } from "./Results";
 import { PUZZLES } from "../puzzle/puzzles";
 
@@ -8,21 +9,25 @@ export function CampaignMap({ onPlay, onPuzzles }: { onPlay: (id: number) => voi
   const { state, dispatch } = useGame();
   const unlocked = (id: number) => id === 1 || state.completed[id - 1] !== undefined;
   const done = Object.keys(state.completed).length;
+  const left = LEVELS.filter((l) => !state.completed[l.id]).reduce((a, l) => a + l.steps, 0);
   return (
     <>
       <TopBar />
       <p className="kicker">IDG · AI Build 301</p>
       <h1>Product Officer</h1>
       <p className="subtitle">Your director says "We need AI." Where do you start?</p>
+      <p className="muted">{done} of {LEVELS.length} levels complete · about {left} questions to go</p>
       <div className="progress"><div style={{ width: `${(done / LEVELS.length) * 100}%` }} /></div>
       <Results />
+      <Wardrobe />
       <div className="map">
         {LEVELS.map((l) => (
           <button key={l.id} className={`node ${state.completed[l.id] ? "done" : ""}`} disabled={!unlocked(l.id)} onClick={() => onPlay(l.id)}>
             <span className="num">{state.completed[l.id] ? "✓" : l.id}</span>
             <span>
               <h3>{l.title}</h3>
-              <p>{l.guide} · {l.blurb}{state.completed[l.id] ? ` · ${"★".repeat(state.completed[l.id])}` : ""}</p>
+              <p>{l.guide} · {l.blurb}</p>
+              <p className="muted">{state.completed[l.id] ? `${"★".repeat(state.completed[l.id])} complete` : `${l.steps} questions`}</p>
             </span>
           </button>
         ))}

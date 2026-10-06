@@ -46,7 +46,7 @@ export function Sorter({ buckets, items, onWrong, onRight, onDone }: {
   if (!item) return null;
   return (
     <div>
-      <div className="progress"><div style={{ width: `${(i / deck.length) * 100}%` }} /></div>
+      <p className="muted"><small>Card {i + 1} of {deck.length}</small></p>
       <div className={`sort-card ${picked ? (solved ? "ok" : "no") : ""}`} key={i}>{item.text}</div>
       <div className="sort-buckets">
         {buckets.map((b, k) => (
