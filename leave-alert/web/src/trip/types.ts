@@ -26,9 +26,10 @@ export type TripView = {
   live: {
     busWaitMin: number | null;
     forecast: string;
-    forecastAt: string; // ISO: the leave time the forecast is for
-    forecastArea: string | null;
-    forecastSource: "two-hour" | "24-hour" | "none" | "unavailable";
+    // The three below are missing when the backend is older than this front end.
+    forecastAt?: string; // ISO: the leave time the forecast is for
+    forecastArea?: string | null;
+    forecastSource?: "two-hour" | "24-hour" | "none" | "unavailable";
     umbrella: boolean;
   };
 };
