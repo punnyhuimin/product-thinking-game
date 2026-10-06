@@ -4,6 +4,8 @@ import type { LevelProps } from "../screens/LevelShell";
 import { Quote } from "../components/Quote";
 import { Feedback } from "../components/Feedback";
 import { MultiChoice } from "../components/MultiChoice";
+import { PuzzleFrame } from "../components/PuzzleFrame";
+import { P3Shuffle } from "./P3Shuffle";
 import { GATE, SNIPPETS, ZONES, ZONE_HINT, type Snippet, type Zone } from "../data/l3";
 
 function Chip({ s, selected, onSelect }: { s: Snippet; selected: boolean; onSelect: () => void }) {
@@ -52,12 +54,19 @@ export function L3Statement({ onMistake, onCorrect, onFinish }: LevelProps) {
 
   const remaining = SNIPPETS.filter((s) => !placed[s.id]);
 
+  if (gate === 99) {
+    return (
+      <PuzzleFrame title="Statement shuffle" onCorrect={onCorrect} onFinish={onFinish}>
+        {(win) => <P3Shuffle onWin={win} />}
+      </PuzzleFrame>
+    );
+  }
   if (gate >= 0) {
     return (
       <div className="card">
         <p className="kicker">Ready to build? · {gate + 1} of {GATE.length}</p>
         <MultiChoice key={gate} q={GATE[gate]} onResult={(ok) => (ok ? onCorrect() : onMistake())}
-          onNext={() => (gate + 1 < GATE.length ? setGate(gate + 1) : onFinish())} nextLabel={gate + 1 < GATE.length ? "Next" : "Finish level"} />
+          onNext={() => (gate + 1 < GATE.length ? setGate(gate + 1) : setGate(99))} nextLabel={gate + 1 < GATE.length ? "Next" : "To the puzzle"} />
       </div>
     );
   }
