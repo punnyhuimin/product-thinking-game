@@ -27,10 +27,17 @@ type Session =
   | { step: "to"; from: Place; list: number; options: Place[] }
   | { step: "arrive"; from: Place; to: Place };
 
+// Also registered with Telegram at startup, so they show in the chat's "/" menu.
+export const COMMANDS = [
+  { command: "trip", description: "Plan a trip" },
+  { command: "status", description: "Show the current trip" },
+  { command: "cancel", description: "Stop planning, or cancel the current trip" },
+  { command: "web", description: "Get a link to plan trips in your browser" },
+];
+
 const HELP =
   "I work out when you need to leave and message you before then.\n\n" +
-  "/trip - plan a trip\n/status - show the current trip\n/cancel - stop planning, or cancel the current trip\n" +
-  "/web - get a link to plan trips in your browser";
+  COMMANDS.map((c) => `/${c.command} - ${c.description[0].toLowerCase()}${c.description.slice(1)}`).join("\n");
 const ASK_FROM = "Where are you starting from? Send a place, address or postal code, or share your location.";
 const ASK_TO = "Where are you going?";
 const ASK_TIME = `What time do you need to arrive? e.g. 18:30 or 6:30pm.\nAdd +15 for a 15 min safety buffer (default ${DEFAULT_BUFFER_MIN}).`;

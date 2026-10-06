@@ -58,3 +58,7 @@ export const getUpdates = (token: string, offset: number, timeoutSec = 30) =>
 // Telegram will POST every update to `url`, sending `secret` in a header.
 export const setWebhook = (token: string, url: string, secret: string) =>
   call<true>(token, "setWebhook", { url, secret_token: secret, allowed_updates: ["message", "callback_query"] });
+
+// Fills the "/" menu Telegram shows next to the message box.
+export const setMyCommands = (token: string, commands: { command: string; description: string }[]) =>
+  call<true>(token, "setMyCommands", { commands });
