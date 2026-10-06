@@ -4,6 +4,8 @@ import { Quote } from "../components/Quote";
 import { Term } from "../components/Term";
 import { Sorter } from "../components/Sorter";
 import { MultiChoice } from "../components/MultiChoice";
+import { PuzzleFrame } from "../components/PuzzleFrame";
+import { P1Strip } from "./P1Strip";
 import { OUTPUT_OUTCOME, PRINCIPLES_QUIZ, PROBLEM_FIRST } from "../data/l1";
 
 export function L1Triage({ onMistake, onCorrect, onFinish }: LevelProps) {
@@ -47,10 +49,15 @@ export function L1Triage({ onMistake, onCorrect, onFinish }: LevelProps) {
             key={q}
             q={PRINCIPLES_QUIZ[q]}
             onResult={(ok) => (ok ? onCorrect() : onMistake())}
-            onNext={() => (q + 1 < PRINCIPLES_QUIZ.length ? setQ(q + 1) : onFinish())}
-            nextLabel={q + 1 < PRINCIPLES_QUIZ.length ? "Next" : "Finish level"}
+            onNext={() => (q + 1 < PRINCIPLES_QUIZ.length ? setQ(q + 1) : setStage(5))}
+            nextLabel={q + 1 < PRINCIPLES_QUIZ.length ? "Next" : "To the puzzle"}
           />
         </div>
+      )}
+      {stage === 5 && (
+        <PuzzleFrame title="Strip the solution" onCorrect={onCorrect} onFinish={onFinish}>
+          {(win) => <P1Strip onMistake={onMistake} onWin={win} />}
+        </PuzzleFrame>
       )}
     </>
   );

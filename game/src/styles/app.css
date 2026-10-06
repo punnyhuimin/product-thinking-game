@@ -83,3 +83,8 @@ kbd { font-family: var(--sans); font-size: .65rem; opacity: .7; border: 1px soli
 .wnode.hinted { box-shadow: 0 0 0 3px var(--accent); animation: pulse 1s infinite alternate; }
 @keyframes pulse { to { box-shadow: 0 0 0 6px var(--accent-soft); } }
 @media (max-width: 420px) { .wnode { font-size: .55rem; width: 23.5%; } }
+.puzzle-kicker { color: var(--accent); }
+.strip { line-height: 2.4; }
+.chunk { font-family: var(--serif); font-size: 1rem; background: none; color: var(--fg); border: 1px dashed var(--rule); border-radius: 6px; padding: .15rem .4rem; margin: 0 .1rem; cursor: pointer; }
+.chunk:hover { border-color: var(--accent); }
+.chunk.gone { text-decoration: line-through; opacity: .45; border-color: var(--bad); }

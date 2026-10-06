@@ -2,6 +2,7 @@ import { LEVELS } from "../data/levels";
 import { useGame } from "../state/store";
 import { TopBar } from "../components/TopBar";
 import { Results } from "./Results";
+import { PUZZLES } from "../puzzle/puzzles";
 
 export function CampaignMap({ onPlay, onPuzzles }: { onPlay: (id: number) => void; onPuzzles: () => void }) {
   const { state, dispatch } = useGame();
@@ -29,7 +30,7 @@ export function CampaignMap({ onPlay, onPuzzles }: { onPlay: (id: number) => voi
       <div className="map">
         <button className="node" disabled={state.completed[2] === undefined} onClick={onPuzzles}>
           <span className="num">?</span>
-          <span><h3>Puzzle Room</h3><p>{state.completed[2] === undefined ? "Unlocks after level 2" : `Cause webs: ${Object.keys(state.puzzles).length} of 3 solved`}</p></span>
+          <span><h3>Puzzle Room</h3><p>{state.completed[2] === undefined ? "Unlocks after level 2" : `Cause webs: ${Object.keys(state.puzzles).length} of ${PUZZLES.length} solved`}</p></span>
         </button>
       </div>
       <p style={{ marginTop: "2rem" }}>

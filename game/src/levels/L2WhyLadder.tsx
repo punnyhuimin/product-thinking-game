@@ -3,6 +3,9 @@ import type { LevelProps } from "../screens/LevelShell";
 import { Quote } from "../components/Quote";
 import { WhyLadder } from "../components/WhyLadder";
 import { CHAINS } from "../data/l2";
+import { CauseWeb } from "../components/CauseWeb";
+import { PuzzleFrame } from "../components/PuzzleFrame";
+import { PUZZLES } from "../puzzle/puzzles";
 
 export function L2WhyLadder({ onMistake, onCorrect, onFinish }: LevelProps) {
   const [i, setI] = useState(-1);
@@ -15,13 +18,21 @@ export function L2WhyLadder({ onMistake, onCorrect, onFinish }: LevelProps) {
       </div>
     );
   }
+  if (i >= CHAINS.length) {
+    const puzzle = PUZZLES.find((p) => p.id === "licence")!;
+    return (
+      <PuzzleFrame title={puzzle.title} onCorrect={onCorrect} onFinish={onFinish}>
+        {(win) => <CauseWeb puzzle={puzzle} onDone={win} />}
+      </PuzzleFrame>
+    );
+  }
   return (
     <WhyLadder
       key={i}
       chain={CHAINS[i]}
       onWrong={onMistake}
       onRight={onCorrect}
-      onDone={() => (i + 1 < CHAINS.length ? setI(i + 1) : onFinish())}
+      onDone={() => setI(i + 1)}
     />
   );
 }

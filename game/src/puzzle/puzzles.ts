@@ -52,3 +52,23 @@ export const PUZZLES: CausePuzzle[] = [
     ],
   },
 ];
+
+PUZZLES.push({
+  id: "licence",
+  title: "The licence drop-off",
+  intro: "Illustrative case. Small businesses abandon licence applications. 🔒 nodes are outside your control. You have 3 fixes.",
+  budget: 3,
+  lesson: "Fixing the scattered requirements clears two branches at once, but the rules-differ branch is locked upstream, so you must fix the controllable node above it. The fee calculator is the one controllable root behind the late-fees problem.",
+  nodes: [
+    { id: "T", text: "Small businesses abandon licence applications", col: 3, row: 1, ctrl: false, causes: ["A", "B"], symptom: true },
+    { id: "A", text: "Applicants can't tell what's required", col: 2, row: 0, ctrl: true, causes: ["C", "D"] },
+    { id: "B", text: "Unexpected costs and delays", col: 2, row: 2, ctrl: false, causes: ["D", "E"] },
+    { id: "C", text: "Rules differ across agencies", col: 1, row: 0, ctrl: false, causes: ["F"] },
+    { id: "D", text: "Requirements scattered across pages", col: 1, row: 1, ctrl: true, causes: ["G", "H"] },
+    { id: "E", text: "Fees revealed late", col: 1, row: 3, ctrl: false, causes: ["I"] },
+    { id: "F", text: "Separate legislation per agency", col: 0, row: 0, ctrl: false, causes: [] },
+    { id: "G", text: "Checklist on a separate page", col: 0, row: 1, ctrl: true, causes: [] },
+    { id: "H", text: "Terms defined only in legislation", col: 0, row: 2, ctrl: true, causes: [] },
+    { id: "I", text: "Fee calculator on the final page", col: 0, row: 3, ctrl: true, causes: [] },
+  ],
+});
