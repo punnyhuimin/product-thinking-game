@@ -66,3 +66,5 @@ kbd { font-family: var(--sans); font-size: .65rem; opacity: .7; border: 1px soli
 .cost > div { height: 100%; background: var(--good); transition: width .2s; }
 .cost > div.over { background: var(--bad); }
 .muted { color: var(--muted); font-family: var(--sans); font-size: .7rem; }
+.criteria { list-style: none; padding: 0; font-size: .9rem; }
+.criteria li { margin: .3rem 0; }

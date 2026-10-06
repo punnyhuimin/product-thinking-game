@@ -1,6 +1,7 @@
 import { LEVELS } from "../data/levels";
 import { useGame } from "../state/store";
 import { TopBar } from "../components/TopBar";
+import { Results } from "./Results";
 
 export function CampaignMap({ onPlay }: { onPlay: (id: number) => void }) {
   const { state, dispatch } = useGame();
@@ -13,6 +14,7 @@ export function CampaignMap({ onPlay }: { onPlay: (id: number) => void }) {
       <h1>Product Officer</h1>
       <p className="subtitle">Your director says "We need AI." Where do you start?</p>
       <div className="progress"><div style={{ width: `${(done / LEVELS.length) * 100}%` }} /></div>
+      <Results />
       <div className="map">
         {LEVELS.map((l) => (
           <button key={l.id} className={`node ${state.completed[l.id] ? "done" : ""}`} disabled={!unlocked(l.id)} onClick={() => onPlay(l.id)}>

@@ -6,6 +6,7 @@ import { L3Statement } from "./L3Statement";
 import { L4MetricForge } from "./L4MetricForge";
 import { L5RiskLab } from "./L5RiskLab";
 import { L6StarDial } from "./L6StarDial";
+import { L7Boss } from "./L7Boss";
 
 export const LEVEL_COMPONENTS: Record<number, ComponentType<LevelProps>> = {
   1: L1Triage,
@@ -14,4 +15,5 @@ export const LEVEL_COMPONENTS: Record<number, ComponentType<LevelProps>> = {
   4: L4MetricForge,
   5: L5RiskLab,
   6: L6StarDial,
+  7: L7Boss,
 };
