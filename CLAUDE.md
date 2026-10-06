@@ -66,3 +66,4 @@ Server imports use explicit `.ts` extensions (`import ... from "./trip.ts"`), wh
 - `leave-alert/server` → Render, configured in `render.yaml` (rootDir `leave-alert`, `npm start`, Node 24). It auto-deploys on commits to `leave-alert/server/**`. On the free plan the instance sleeps after about 15 minutes idle, which pauses the alert loop.
 - `game/` has no deploy setup.
 - PRs get an automated Claude review (`.github/workflows/claude-code-review.yml`).
+- Every PR and push to `main` runs the `leave-alert` server unit tests (`.github/workflows/tests.yml`).
