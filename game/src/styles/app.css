@@ -32,3 +32,5 @@ h2 { font-size: 1.4rem; font-weight: 400; font-style: italic; margin: 1.5rem 0 .
 .node.done .num { background: var(--good); color: #fff; }
 .node h3 { margin: 0; font-size: 1.05rem; font-weight: 600; }
 .node p { margin: .1rem 0 0; font-size: .85rem; color: var(--muted); }
+.term[data-def]:hover::after, .term[data-def]:focus::after { content: attr(data-def); position: absolute; margin-top: 1.4rem; max-width: 16rem; background: var(--fg); color: var(--bg); font-family: var(--sans); font-size: .75rem; padding: .4rem .6rem; border-radius: 6px; z-index: 5; }
+.term { position: relative; }
