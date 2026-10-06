@@ -5,6 +5,7 @@ import { WhyLadder } from "../components/WhyLadder";
 import { CHAINS } from "../data/l2";
 import { CauseWeb } from "../components/CauseWeb";
 import { PuzzleFrame } from "../components/PuzzleFrame";
+import { DEBRIEF } from "../data/debrief";
 import { PUZZLES } from "../puzzle/puzzles";
 
 export function L2WhyLadder({ onMistake, onCorrect, onFinish }: LevelProps) {
@@ -21,7 +22,7 @@ export function L2WhyLadder({ onMistake, onCorrect, onFinish }: LevelProps) {
   if (i >= CHAINS.length) {
     const puzzle = PUZZLES.find((p) => p.id === "licence")!;
     return (
-      <PuzzleFrame title={puzzle.title} onCorrect={onCorrect} onFinish={onFinish}>
+      <PuzzleFrame title={puzzle.title} debrief={DEBRIEF[2]} onCorrect={onCorrect} onMistake={onMistake} onFinish={onFinish}>
         {(win) => <CauseWeb puzzle={puzzle} onDone={win} />}
       </PuzzleFrame>
     );

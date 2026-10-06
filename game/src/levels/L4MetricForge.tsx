@@ -5,6 +5,7 @@ import { Term } from "../components/Term";
 import { MultiChoice, type MCQ } from "../components/MultiChoice";
 import { Orderer } from "../components/Orderer";
 import { PuzzleFrame } from "../components/PuzzleFrame";
+import { DEBRIEF } from "../data/debrief";
 import { P4Builder } from "./P4Builder";
 import { AFTER_QS, LADDER, SMART_QS } from "../data/l4";
 
@@ -39,7 +40,7 @@ export function L4MetricForge({ onMistake, onCorrect, onFinish }: LevelProps) {
       )}
       {stage === 3 && run(AFTER_QS, () => setStage(4), "To the puzzle")}
       {stage === 4 && (
-        <PuzzleFrame title="Metric builder" onCorrect={onCorrect} onFinish={onFinish}>
+        <PuzzleFrame title="Metric builder" debrief={DEBRIEF[4]} onCorrect={onCorrect} onMistake={onMistake} onFinish={onFinish}>
           {(win) => <P4Builder onWin={win} />}
         </PuzzleFrame>
       )}

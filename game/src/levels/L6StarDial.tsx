@@ -4,6 +4,7 @@ import { Quote } from "../components/Quote";
 import { Feedback } from "../components/Feedback";
 import { MultiChoice } from "../components/MultiChoice";
 import { PuzzleFrame } from "../components/PuzzleFrame";
+import { DEBRIEF } from "../data/debrief";
 import { P6Tradeoffs } from "./P6Tradeoffs";
 import { BUDGET, CX_QS, STARS } from "../data/l6";
 
@@ -33,7 +34,7 @@ export function L6StarDial({ onMistake, onCorrect, onFinish }: LevelProps) {
 
   if (stage === 3) {
     return (
-      <PuzzleFrame title="Release trade-offs" onCorrect={onCorrect} onFinish={onFinish}>
+      <PuzzleFrame title="Release trade-offs" debrief={DEBRIEF[6]} onCorrect={onCorrect} onMistake={onMistake} onFinish={onFinish}>
         {(win) => <P6Tradeoffs onWin={win} />}
       </PuzzleFrame>
     );

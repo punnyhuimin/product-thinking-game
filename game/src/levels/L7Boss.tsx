@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { LevelProps } from "../screens/LevelShell";
 import { MultiChoice } from "../components/MultiChoice";
 import { PuzzleFrame } from "../components/PuzzleFrame";
+import { DEBRIEF } from "../data/debrief";
 import { P7Memory } from "./P7Memory";
 import { REQUEST, STEPS } from "../data/boss";
 
@@ -19,7 +20,7 @@ export function L7Boss({ onMistake, onCorrect, onFinish }: LevelProps) {
   }
   if (i >= STEPS.length) {
     return (
-      <PuzzleFrame title="Toolkit memory match" onCorrect={onCorrect} onFinish={onFinish}>
+      <PuzzleFrame title="Toolkit memory match" debrief={DEBRIEF[7]} onCorrect={onCorrect} onMistake={onMistake} onFinish={onFinish}>
         {(win) => <P7Memory onWin={win} />}
       </PuzzleFrame>
     );

@@ -5,6 +5,7 @@ import { Sorter } from "../components/Sorter";
 import { MultiChoice } from "../components/MultiChoice";
 import { Orderer } from "../components/Orderer";
 import { PuzzleFrame } from "../components/PuzzleFrame";
+import { DEBRIEF } from "../data/debrief";
 import { P5Planner } from "./P5Planner";
 import { AFTER_AB, RISKS, RISK_BUCKETS, SKATE_Q, STAGES, TEST_Q } from "../data/l5";
 
@@ -62,7 +63,7 @@ export function L5RiskLab({ onMistake, onCorrect, onFinish }: LevelProps) {
       )}
       {stage === 6 && <div className="card"><MultiChoice q={SKATE_Q} onResult={res} onNext={() => setStage(7)} nextLabel="To the puzzle" /></div>}
       {stage === 7 && (
-        <PuzzleFrame title="Experiment planner" onCorrect={onCorrect} onFinish={onFinish}>
+        <PuzzleFrame title="Experiment planner" debrief={DEBRIEF[5]} onCorrect={onCorrect} onMistake={onMistake} onFinish={onFinish}>
           {(win) => <P5Planner onWin={win} />}
         </PuzzleFrame>
       )}

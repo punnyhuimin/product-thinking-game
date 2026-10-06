@@ -5,6 +5,7 @@ import { Quote } from "../components/Quote";
 import { Feedback } from "../components/Feedback";
 import { MultiChoice } from "../components/MultiChoice";
 import { PuzzleFrame } from "../components/PuzzleFrame";
+import { DEBRIEF } from "../data/debrief";
 import { P3Shuffle } from "./P3Shuffle";
 import { GATE, SNIPPETS, ZONES, ZONE_HINT, type Snippet, type Zone } from "../data/l3";
 
@@ -56,7 +57,7 @@ export function L3Statement({ onMistake, onCorrect, onFinish }: LevelProps) {
 
   if (gate === 99) {
     return (
-      <PuzzleFrame title="Statement shuffle" onCorrect={onCorrect} onFinish={onFinish}>
+      <PuzzleFrame title="Statement shuffle" debrief={DEBRIEF[3]} onCorrect={onCorrect} onMistake={onMistake} onFinish={onFinish}>
         {(win) => <P3Shuffle onWin={win} />}
       </PuzzleFrame>
     );

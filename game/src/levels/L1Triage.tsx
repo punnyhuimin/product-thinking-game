@@ -5,6 +5,7 @@ import { Term } from "../components/Term";
 import { Sorter } from "../components/Sorter";
 import { MultiChoice } from "../components/MultiChoice";
 import { PuzzleFrame } from "../components/PuzzleFrame";
+import { DEBRIEF } from "../data/debrief";
 import { P1Strip } from "./P1Strip";
 import { OUTPUT_OUTCOME, PRINCIPLES_QUIZ, PROBLEM_FIRST } from "../data/l1";
 
@@ -55,7 +56,7 @@ export function L1Triage({ onMistake, onCorrect, onFinish }: LevelProps) {
         </div>
       )}
       {stage === 5 && (
-        <PuzzleFrame title="Strip the solution" onCorrect={onCorrect} onFinish={onFinish}>
+        <PuzzleFrame title="Strip the solution" debrief={DEBRIEF[1]} onCorrect={onCorrect} onMistake={onMistake} onFinish={onFinish}>
           {(win) => <P1Strip onMistake={onMistake} onWin={win} />}
         </PuzzleFrame>
       )}
