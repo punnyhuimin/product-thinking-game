@@ -1,0 +1,10 @@
+{
+  "name": "leave-alert",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "server": "node --env-file=.env --experimental-strip-types --no-warnings server/index.ts",
+    "test":"node --experimental-strip-types --test server/*.test.ts"
+  }
+}
