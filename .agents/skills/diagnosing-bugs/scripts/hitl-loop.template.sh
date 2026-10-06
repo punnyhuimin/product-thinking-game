@@ -1,21 +1,16 @@
 #!/usr/bin/env bash
-# Human-in-the-loop reproduction loop.
-# Copy this file, edit the steps below, and run it.
-# The agent runs the script; the user follows prompts in their terminal.
+# Human-in-the-loop reproduction loop. Copy this file, edit the steps, and run it;
+# the user answers the prompts in their terminal.
 #
-# Usage:
-#   bash hitl-loop.template.sh
+#   step "<instruction>"        show instruction, wait for Enter
+#   capture VAR "<question>"    show question, read the answer into VAR
 #
-# Two helpers:
-#   step "<instruction>"          → show instruction, wait for Enter
-#   capture VAR "<question>"      → show question, read response into VAR
-#
-# At the end, captured values are printed as KEY=VALUE for the agent to parse.
-#
-# `capture` prints its value back to the terminal, where the agent reads it,
-# so capture observations, and leave signing in to the user as a `step`.
+# Captured answers are printed as KEY=VALUE at the end for the agent to read,
+# so capture observations only. Signing in, passwords and the like go in a `step`.
 
 set -euo pipefail
+
+captured=""
 
 step() {
   printf '\n>>> %s\n' "$1"
@@ -23,10 +18,9 @@ step() {
 }
 
 capture() {
-  local var="$1" question="$2" answer
-  printf '\n>>> %s\n' "$question"
-  read -r -p "    > " answer
-  printf -v "$var" '%s' "$answer"
+  printf '\n>>> %s\n' "$2"
+  read -r -p "    > " "$1"
+  captured+=" $1"
 }
 
 # --- edit below ---------------------------------------------------------
@@ -40,5 +34,4 @@ capture ERROR_MSG "Paste the error message (or 'none'):"
 # --- edit above ---------------------------------------------------------
 
 printf '\n--- Captured ---\n'
-printf 'ERRORED=%s\n' "$ERRORED"
-printf 'ERROR_MSG=%s\n' "$ERROR_MSG"
+for var in $captured; do printf '%s=%s\n' "$var" "${!var}"; done
