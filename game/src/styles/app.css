@@ -34,3 +34,14 @@ h2 { font-size: 1.4rem; font-weight: 400; font-style: italic; margin: 1.5rem 0 .
 .node p { margin: .1rem 0 0; font-size: .85rem; color: var(--muted); }
 .term[data-def]:hover::after, .term[data-def]:focus::after { content: attr(data-def); position: absolute; margin-top: 1.4rem; max-width: 16rem; background: var(--fg); color: var(--bg); font-family: var(--sans); font-size: .75rem; padding: .4rem .6rem; border-radius: 6px; z-index: 5; }
 .term { position: relative; }
+.sort-card { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 1.6rem 1.2rem; font-size: 1.15rem; text-align: center; min-height: 7rem; display: grid; place-items: center; animation: slide .25s; }
+.sort-card.ok { border-color: var(--good); background: var(--good-soft); }
+.sort-card.no { border-color: var(--bad); animation: shake .3s; }
+@keyframes slide { from { transform: translateX(30px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.sort-buckets { display: flex; gap: .6rem; margin: .8rem 0; }
+.sort-buckets .btn { flex: 1; }
+kbd { font-family: var(--sans); font-size: .65rem; opacity: .7; border: 1px solid currentColor; border-radius: 3px; padding: 0 .25rem; margin-left: .3rem; }
+.ladder { list-style: none; padding: 0; margin: .5rem 0 1rem; border-left: 2px solid var(--rule); }
+.ladder li { margin: .4rem 0 .4rem .8rem; padding-left: .4rem; animation: slide .25s; font-size: .95rem; }
+.why-tag { font-family: var(--sans); font-size: .65rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-right: .4rem; }
