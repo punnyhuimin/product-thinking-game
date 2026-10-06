@@ -57,3 +57,7 @@ kbd { font-family: var(--sans); font-size: .65rem; opacity: .7; border: 1px soli
 .chip.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
 .chip.drag { cursor: grabbing; box-shadow: 0 6px 18px rgba(0,0,0,.2); }
 .order-axis { display: flex; justify-content: space-between; font-family: var(--sans); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: .4rem; }
+.bar-row { display: grid; grid-template-columns: 5.5rem 1fr 2rem; gap: .6rem; align-items: center; font-family: var(--sans); font-size: .85rem; margin: .5rem 0; }
+.bar { height: 1.1rem; background: var(--rule); border-radius: 4px; overflow: hidden; }
+.bar > div { height: 100%; background: var(--muted); }
+.bar > div.t { background: var(--good); }
