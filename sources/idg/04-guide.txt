@@ -1,0 +1,51 @@
+[IMG: Institute of Digital Government]
+
+- 
+- 
+- 
+- 
+
+- Home
+- Guides & Resources
+- Product Thinking: Metrics
+
+# Product Thinking: Metrics
+19 May 2026
+
+Learning Pathway:
+
+AI Build 301
+Learn how to choose metrics that help you track progress towards meaningful outcomes.
+
+[IMG: Thumbnail for Video for Selecting Useful Metrics]
+## 3 Tools You Can Use
+We have a problem statement. Now we need to know how we'll measure progress. Three tools help us define better metrics: 
+- 
+SMART: what good metrics look like
+- 
+Leading and lagging indicators: how to find the right one to track
+- 
+Value-cost ratio: a lens for assessing return on investment
+## Tool 1: SMART
+Use SMART as a check for whether a metric is specific, measurable, achievable, relevant and time-bound.
+[IMG: Specific, Measurable, Achievable, Relevant, Time-bound]
+## Tool 2: Leading and Lagging Indicators
+Leading indicators provide early feedback, while lagging indicators measure real outcomes. The key is understanding how they work together.
+[IMG: LEADING LAGGING INDICATORS]
+## Tool 3: Value-Cost Ratio (VCR) 
+The Value-Cost Ratio (VCR) is a simple lens for comparing the value a solution is expected to create with the resources required to deliver it.
+[IMG: VALUE to COST RATIO]
+Not all public-sector value can or should be expressed in dollars, so use VCR as one input alongside other considerations.
+
+## Try it out!
+- 
+Identify the most appropriate metric for your problem statement.
+- 
+Map your leading and lagging indicators to locate that metric on the chain.
+- 
+Derive your current VCR. What would need to change to improve it?
+⏭️Next Guide: Assumptions and Risks ↩️Return to - AI 301: Build with AIBack to top
+
+## 
+
+##

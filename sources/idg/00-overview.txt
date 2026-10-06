@@ -1,0 +1,78 @@
+[IMG: Institute of Digital Government]
+
+- 
+- 
+- 
+- 
+
+- Home
+- Product Thinking
+
+# Product Thinking
+Before you build, you need to think clearly about the problem. Learn how to define, scope and frame challenges so your AI solutions solve the right thing.
+Start Learning
+Last updated on 10 July 2026
+
+On this page
+- Learning Pathway Preview:
+- Learning Objectives
+- Product Thinking:
+- 📚Additional Resources
+
+## Learning Pathway Preview:
+
+[IMG: Thumbnail for Course Preview Video]
+
+## Learning Objectives
+
+### Objective 1
+Apply the 4Cs Framework to write a clear, data-backed problem statement before any build begins.
+### Objective 2
+Distinguish between outputs and outcomes — and define success by the change achieved, not the features delivered.
+### Objective 3
+Use root cause analysis techniques like the Five Whys to move from surface symptoms to the real underlying problem.
+## Product Thinking: 1: Understanding the Problem
+
+Learn why great digital solutions start with problems, not technologies. This module introduces the product thinking mindset and its three core principles: problems before solutions, outcomes over outputs, and Policy-Ops-Tech integration.
+🔗 Go to Understanding the Problem2: Craft a Clear Problem Statement.
+
+A vague problem leads to a vague solution. This module walks you through the 4Cs Framework — Clarity, Consequence, Cause, and Confirmation — to write one sharp, data-backed problem statement before any build begins.
+
+🔗 Go to Craft a Clear Problem Statement.3: Start With The Whys
+
+A vague problem leads to a vague solution. This module walks you through the 4Cs Framework — Clarity, Consequence, Cause, and Confirmation — to write one sharp, data-backed problem statement before any build begins.
+
+🔗 Go to Start with the Whys4: Metrics
+
+Knowing what to measure is as important as knowing what to build. This module covers how to choose metrics that reflect real outcomes, not just activity, so you can track whether your solution is actually working.
+
+🔗 Go to Metrics5: Assumptions and Risks
+
+Every solution rests on assumptions. This module teaches you how to surface, stress-test, and de-risk those assumptions early — before they become expensive mistakes in production.
+
+🔗 Go to Assumptions and Risks6: A Good Customer Experience
+
+We have a problem statement, metrics, and a handle on risk. Now: what does it actually feel like to use what we build?
+
+🔗 Go to A Good Customer Experience7: Key Takeaways
+
+Wrap up with the key takeaways for this learning pathway. Product thinking is a discipline of asking better questions before reaching for solutions.
+
+🔗 Go to Key Takeaways
+
+## Ready to think like a product team? 
+Join public officers applying smarter problem-solving frameworks to real government challenges.
+Start LearningView All Courses
+## 📚Additional Resources
+[IMG: a thumbnail for CRAFT]
+
+Interested to learn more about Product Thinking? 
+
+Explore Craft, a curated collection of product thinking and product management resources developed by GovTech practitioners.
+
+Go to the Craft page (public officers only) ↗ (opens in new tab)
+Back to top
+
+## 
+
+##

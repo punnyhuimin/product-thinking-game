@@ -1,0 +1,54 @@
+Source: https://www.youtube.com/watch?v=_iZNhzdLd7A
+
+# Product Thinking - Testing assumptions and mitigating risks (5 of 7) ![Product Thinking - Testing
+assumptions and mitigating risks (5 of 7)](https://i.ytimg.com/vi_webp/_iZNhzdLd7A/hqdefault.webp) >
+Retrieved from https://www.youtube.com/watch?v=_iZNhzdLd7A on 2026-10-06T02:41:46Z via ytsubs ##
+Metadata {"videoId":"_iZNhzdLd7A","author":"Institute of Digital Government","channelId":"UCzzGo1hm-
+t4uJQLK4KfNfuQ","lengthSeconds":311,"viewCount":469,"keywords":[],"thumbnails":[{"url":"https://i.yt
+img.com/vi_webp/_iZNhzdLd7A/default.webp","width":120,"height":90},{"url":"https://i.ytimg.com/vi_we
+bp/_iZNhzdLd7A/mqdefault.webp","width":320,"height":180},{"url":"https://i.ytimg.com/vi_webp/_iZNhzd
+Ld7A/hqdefault.webp","width":480,"height":360},{"url":"https://i.ytimg.com/vi_webp/_iZNhzdLd7A/sddef
+ault.webp","width":640,"height":480}],"isLiveContent":false} ## Description ## Text We now have a
+problem statement and metrics to track, but before we build anything, we need to ask, what could
+possibly go wrong? And what's the cheapest way to find out? This section is about dreaming big and
+starting small. Every product faces three types of risks. There is market risk. Will anyone actually
+use this? And even if they do, will it solve the problem? There are technical risks. Is this too
+complex or too costly to build relative to the business impact it delivers? There are team risks. Do
+we have the right capabilities in the team to pull this off? There are always risks. If a project
+seems entirely risk-free, it's a sign that someone isn't looking hard enough. Most digital products
+go through several phases to de-risk. A proof of concept test whether the solution works. It's
+usually scoped to a single user segment with a single use case. The proof of value phase test
+whether something can scale. We now scale to more user segments to solve more problems. The scale
+phase is about reaching as many users as possible, and maturity is where we continue improving the
+product over time. Building a product in stages, scaling isn't about building all the parts before
+anything works. When we want to move people from point A to point B, we don't just build the wheels,
+the chassis, and then the body, and finally a car. We start with a skateboard, then a scooter, a
+bicycle, a motorcycle, and finally a car. At every stage, users have something functional. At every
+stage, we are learning something. Amazon started with books. Facebook launched at a single
+university. Airbnb started with the founders own spare room. Netflix started with DVD rentals. Grab
+started with taxis. None of them started with the full product we see today. They started with one
+problem solved well. A good example from the government is the health appointment booking system.
+The problem, pneumococcal was one of the leading causes of death in Singapore. It is preventable by
+a vaccine, but the government rates in high-risk groups were low. The hypothesis, by making it
+easier to book, more people will get vaccinated. The main risk was a market risk. Would people
+actually book online? To test it, they did the simplest possible version. A form SG form feeding
+into an Excel sheet with a product manager manually calling clinics and sending confirmation via
+email. Not scalable, but that wasn't the point. It was the lowest way to validate the approach. They
+also ran an AB test. The control group received a standard letter having to find the clinics
+themselves. The treatment group received a letter with a QR code linking to the booking flow. At the
+end of 2 weeks, there were zero appointments from the control group and 24 from the treatment group.
+With more completions than the original test subjects. One variable with clear results. To address
+market risk, get the product in front of your real users as early as possible. You want to be
+roughly correct early, not precisely wrong later. When we observe users, watch what they do, not
+just what they say. The behavior often reveals more than feedback forms. To address team risk,
+structure your team for speed, focus, and flexibility. Speed, so that your team can be learning from
+decisions quickly without getting stuck in processes. Focus, so that the team can stay locked in to
+the underlying problem, not just the features. Flexibility, so that you can iterate when the
+evidence tells you to. Two principles underpin this. First, bring together policy what's and tech
+expertise in one team with actual levers to act. Second, establish clear accountabilities for each
+role. Ambiguity about who owns what is where good projects start to stall. Each initiative carries
+risks. Usually some combination of market, technical, and or team risk. The goal isn't to eliminate
+risk entirely, but to identify the biggest risk early and to find the lowest cost way to test our
+assumptions before we over invest. Start with a proof of concept, learn from it, then scale what
+works. Here's the question to reflect on. What is the key risk that could prevent your initiative
+from succeeding, and what's the simplest experiment you could run to find out?

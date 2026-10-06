@@ -1,0 +1,29 @@
+Source: https://www.youtube.com/watch?v=sI5veUTIzkk
+
+# Product Thinking - Summary on Key Takeaways (7 of 7) ![Product Thinking - Summary on Key Takeaways
+(7 of 7)](https://i.ytimg.com/vi_webp/sI5veUTIzkk/hqdefault.webp) > Retrieved from
+https://www.youtube.com/watch?v=sI5veUTIzkk on 2026-10-06T02:41:47Z via ytsubs ## Metadata
+{"videoId":"sI5veUTIzkk","author":"Institute of Digital Government","channelId":"UCzzGo1hm-
+t4uJQLK4KfNfuQ","lengthSeconds":133,"viewCount":392,"keywords":[],"thumbnails":[{"url":"https://i.yt
+img.com/vi_webp/sI5veUTIzkk/default.webp","width":120,"height":90},{"url":"https://i.ytimg.com/vi_we
+bp/sI5veUTIzkk/mqdefault.webp","width":320,"height":180},{"url":"https://i.ytimg.com/vi_webp/sI5veUT
+Izkk/hqdefault.webp","width":480,"height":360},{"url":"https://i.ytimg.com/vi_webp/sI5veUTIzkk/sddef
+ault.webp","width":640,"height":480}],"isLiveContent":false} ## Description ## Text We've covered a
+lot of ground. Let's bring it all together. Product thinking is a discipline of asking better
+questions before reaching for solutions. We started with why. The five whys exercise helps peel back
+problems to find out what's actually driving it. From there, we crafted a clear problem statement
+using the four C's framework. Clarity, consequence, cause, and confirmation. One statement, four
+dimensions, still no solutions yet. With the problem defined, we then set useful metrics, smart
+ones. We defined leading and lagging indicators to find the right ones to track and use the value
+cost ratio to assess returns on investment. We assess risk and scale. Identify your biggest risk
+early, find the lowest way to test it, start with a proof of concept, learn, then scale what works.
+Finally, we spoke about the 11 stars framework to help think about what a good user experience looks
+like. If there are three things to remember, let them be these. We want to move from solutions to
+problems. Start with what's broken, not what technology is available. We want to move from outputs
+to outcomes. A website with five buttons is an output. More citizens completing transactions is the
+outcome. We want to move from big bang to stage delivery. Do the skateboard before you do the car.
+Grab Amazon, Netflix. None of them started with the full vision we see today. They each solved one
+problem for one group of people exceptionally well. That's the standard we're aiming for too. We now
+have the frameworks. The five whys, the four C's, smart metrics, value cost ratio, and a staged
+approach to scaling. Take one initiative you're working on. Apply them. That's product thinking in
+practice.

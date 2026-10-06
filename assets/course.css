@@ -1,0 +1,190 @@
+/* Shared stylesheet for every lesson and reference doc in this workspace. */
+
+:root {
+  --bg: #fbf9f4;
+  --fg: #1f1d1a;
+  --muted: #6b665d;
+  --rule: #e2ddd1;
+  --accent: #9a3b1f;
+  --accent-soft: #f4e6dd;
+  --good: #2f6b3a;
+  --good-soft: #e3efe3;
+  --bad: #9a2a2a;
+  --bad-soft: #f5e1e1;
+  --card: #ffffff;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1a18;
+    --fg: #ece8df;
+    --muted: #a39d92;
+    --rule: #3a3732;
+    --accent: #e08a68;
+    --accent-soft: #3a2a22;
+    --good: #8fcf98;
+    --good-soft: #22332a;
+    --bad: #ef9a9a;
+    --bad-soft: #3a2424;
+    --card: #23221f;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { font-size: 19px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--serif);
+  line-height: 1.55;
+  padding: 3rem 1.25rem 5rem;
+}
+main { max-width: 34rem; margin: 0 auto; position: relative; }
+
+/* Header */
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.6rem;
+}
+h1 { font-size: 2.1rem; line-height: 1.15; font-weight: 400; margin: 0 0 0.6rem; }
+.subtitle { font-style: italic; color: var(--muted); font-size: 1.1rem; margin: 0 0 2rem; }
+h2 {
+  font-size: 1.35rem; font-weight: 400; font-style: italic;
+  margin: 2.6rem 0 0.8rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+}
+h3 { font-size: 1rem; font-family: var(--sans); font-weight: 600; margin: 1.6rem 0 0.4rem; }
+p, li { hyphens: auto; }
+a { color: var(--accent); text-underline-offset: 2px; }
+strong { font-weight: 600; }
+
+/* Tufte-ish sidenotes: in the margin on wide screens, inline on narrow */
+.sidenote {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 0.4rem 0 1rem;
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--rule);
+}
+@media (min-width: 1100px) {
+  .sidenote {
+    float: right; clear: right;
+    width: 13rem; margin: 0.2rem -15.5rem 1rem 0;
+    padding-left: 0; border: 0;
+  }
+}
+
+/* Pull quote / key idea */
+.key {
+  font-size: 1.25rem; line-height: 1.4;
+  border-left: 3px solid var(--accent);
+  padding: 0.2rem 0 0.2rem 1rem; margin: 1.5rem 0;
+}
+.key cite { display: block; font-size: 0.75rem; font-style: normal; color: var(--muted); margin-top: 0.4rem; font-family: var(--sans); }
+
+/* Simple two-column contrast table */
+table.contrast { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 1rem 0; }
+table.contrast th { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: left; font-weight: 600; }
+table.contrast th, table.contrast td { padding: 0.5rem 0.6rem 0.5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.table-wrap { overflow-x: auto; }
+
+/* Activity boxes */
+.activity {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.1rem 1.2rem;
+  margin: 1.4rem 0;
+}
+.activity > .label {
+  font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700; margin: 0 0 0.5rem;
+}
+.activity p:first-of-type { margin-top: 0; }
+
+/* Callouts */
+.source-box {
+  background: var(--accent-soft);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin: 2rem 0 1rem;
+  font-size: 0.92rem;
+}
+.source-box .label, .ask-box .label {
+  font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-bottom: 0.3rem;
+}
+.ask-box {
+  border: 1px dashed var(--muted);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+nav.lesson-nav {
+  font-family: var(--sans); font-size: 0.8rem;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.8rem;
+  margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule);
+}
+nav.lesson-nav .soon { color: var(--muted); }
+
+/* ---------- Components (see components.js) ---------- */
+.sorter-item { padding: 0.8rem 0; border-bottom: 1px solid var(--rule); }
+.sorter-item:last-of-type { border-bottom: 0; }
+.sorter-item .prompt { margin: 0 0 0.5rem; }
+.choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+button.choice, button.btn {
+  font-family: var(--sans); font-size: 0.82rem;
+  padding: 0.45rem 0.9rem; min-width: 8.5rem;
+  border: 1px solid var(--rule); border-radius: 4px;
+  background: var(--bg); color: var(--fg); cursor: pointer;
+}
+button.choice:hover:not(:disabled), button.btn:hover { border-color: var(--accent); }
+button.choice:disabled { cursor: default; }
+button.choice.correct { background: var(--good-soft); border-color: var(--good); color: var(--good); }
+button.choice.wrong { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
+.feedback { font-size: 0.85rem; margin: 0.5rem 0 0; color: var(--muted); }
+.feedback .verdict { font-family: var(--sans); font-weight: 700; margin-right: 0.3rem; }
+.feedback .verdict.ok { color: var(--good); }
+.feedback .verdict.no { color: var(--bad); }
+.score { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); margin-top: 0.8rem; }
+.btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.7rem; }
+
+textarea.recall {
+  width: 100%; min-height: 6rem; resize: vertical;
+  font: inherit; font-size: 0.95rem; line-height: 1.45;
+  padding: 0.6rem 0.7rem; border: 1px solid var(--rule); border-radius: 4px;
+  background: var(--bg); color: var(--fg);
+}
+.reveal { margin-top: 0.9rem; padding-top: 0.8rem; border-top: 1px dashed var(--rule); font-size: 0.92rem; }
+.reveal ul { padding-left: 1.2rem; margin: 0.4rem 0; }
+.checklist label { display: block; font-size: 0.9rem; margin: 0.3rem 0; cursor: pointer; }
+.checklist input { margin-right: 0.5rem; }
+
+/* Reference documents: denser, print-first */
+body.reference main { max-width: 46rem; }
+body.reference h2 { margin-top: 1.8rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.8rem; }
+.cell { border: 1px solid var(--rule); border-radius: 6px; padding: 0.7rem 0.9rem; background: var(--card); font-size: 0.88rem; }
+.cell .n { font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+.cell h4 { margin: 0.2rem 0 0.3rem; font-size: 0.98rem; font-weight: 600; }
+.cell p { margin: 0; color: var(--muted); }
+.tag { font-family: var(--sans); font-size: 0.66rem; background: var(--accent-soft); color: var(--accent); padding: 0.1rem 0.4rem; border-radius: 3px; }
+
+@media print {
+  :root { --bg: #fff; --card: #fff; }
+  html { font-size: 11pt; }
+  body { padding: 0; }
+  .activity, .ask-box, nav.lesson-nav { display: none; }
+  .sidenote { float: none; width: auto; margin: 0.2rem 0 0.6rem; }
+  a { color: inherit; }
+  .cell { break-inside: avoid; }
+}

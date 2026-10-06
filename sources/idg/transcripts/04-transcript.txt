@@ -1,0 +1,49 @@
+Source: https://www.youtube.com/watch?v=Rtb_tlSzTJ0
+
+# Product Thinking - Defining Useful Metrics (4 of 7) ![Product Thinking - Defining Useful Metrics
+(4 of 7)](https://i.ytimg.com/vi_webp/Rtb_tlSzTJ0/hqdefault.webp) > Retrieved from
+https://www.youtube.com/watch?v=Rtb_tlSzTJ0 on 2026-10-06T02:41:46Z via ytsubs ## Metadata
+{"videoId":"Rtb_tlSzTJ0","author":"Institute of Digital Government","channelId":"UCzzGo1hm-
+t4uJQLK4KfNfuQ","lengthSeconds":282,"viewCount":497,"keywords":[],"thumbnails":[{"url":"https://i.yt
+img.com/vi_webp/Rtb_tlSzTJ0/default.webp","width":120,"height":90},{"url":"https://i.ytimg.com/vi_we
+bp/Rtb_tlSzTJ0/mqdefault.webp","width":320,"height":180},{"url":"https://i.ytimg.com/vi_webp/Rtb_tlS
+zTJ0/hqdefault.webp","width":480,"height":360},{"url":"https://i.ytimg.com/vi_webp/Rtb_tlSzTJ0/sddef
+ault.webp","width":640,"height":480}],"isLiveContent":false} ## Description ## Text We now have a
+clear problem statement. Now, we need to measure progress. Without the right metrics, we can't tell
+whether we're actually solving the problem or just being busy. In this section, we cover three tools
+for defining better metrics. First, SMART, a framework for defining what good metrics looks like.
+Second, leading and lagging indicators to help us find the most appropriate metric to track. And
+third, value for class ratio, the whole of government metric that helps us assess returns on
+investment. Metrics matter because they keep us honest. They tell us how well we're solving the
+problem and to what extent. Without them, we're building on instinct, and instincts are known hardly
+hold up in a funding review. SMART metrics. Good metrics share five properties. They are specific,
+measurable, achievable, relevant, and time-bound. Specific. Making the website better is not very
+specific. Improving the click-through rates from 20% to 25% is. Measurable. Improving citizen
+happiness is not measurable. Net promoter score is measurable. Achievable. What one engineer can
+deliver in the sprint is very different from what 10 engineers can deliver in a year. Set targets
+that that are ambitious yet grounded. Relevant. If NPS increases, users are likely happier. If page
+load time drops, the experience is likely better. The metric should move when the problem is being
+solved. Time-bound. What's achievable in 3 months looks very different from what's achievable in 3
+years. Anchor your targets to a timeline. One useful signal. If you're struggling to identify a
+single right metric, the problem statement is probably too broad. Narrow down the problem statement.
+Leading and lagging indicators. Not all metrics are equally easy to measure. That's where leading
+and lagging indicators come in. Leading indicators are early signals. Measurable frequently and
+precisely, but perhaps further from the actual outcome. Lagging indicators sit closer to the real
+problem, but tend to take longer to surface and may be harder to pin down. Your key metric usually
+lies somewhere in between. Here's an example using the teachers portal. On one hand, we can easily
+track the number of teachers on board daily. It's easy to measure, but perhaps not very telling.
+Moving further on, you know how many teachers used a specific feature, how many crafted a message
+within a specific time limit, how many campaigns were approved quickly, and finally, how much time
+did the teachers actually save? The last indicator is probably closest to the real problem, but it
+might only be measurable quarterly. The value of tracking the earlier indicators is that it gives
+you faster feedback. If a new feature we released shows low adoption rate in week two, you don't
+have to wait till the end of the quarter to conclude that it probably isn't saving anyone's time.
+Value cost ratio. The value cost ratio or VCR is a metric adopted across the whole of government. It
+measures the units of value generated per dollar spent. VCR isn't a verdict. It doesn't tell you
+whether a number is good or bad in isolation, but it does ask the right and enable the right
+questions. How much value do we expect from an extra dollar of investment and what needs to change
+for the ratio to improve? Good metrics are smart. Leading and lagging indicators help us find the
+right ones to track. Value cost ratio helps us answer the right questions. They matter in every
+conversation. Here's a third exercise. For your problem statement, identify your most appropriate
+metric. Map out the leading and lagging indicators to find it, then derive your current value cost
+ratio. In the next section, we look at assumptions and risks.

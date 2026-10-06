@@ -1,0 +1,42 @@
+Source: https://www.youtube.com/watch?v=aBSAouM7iaE
+
+# Product Thinking - Crafting a Clear Problem Statement (3 of 7) ![Product Thinking - Crafting a
+Clear Problem Statement (3 of 7)](https://i.ytimg.com/vi_webp/aBSAouM7iaE/hqdefault.webp) >
+Retrieved from https://www.youtube.com/watch?v=aBSAouM7iaE on 2026-10-06T02:41:46Z via ytsubs ##
+Metadata {"videoId":"aBSAouM7iaE","author":"Institute of Digital Government","channelId":"UCzzGo1hm-
+t4uJQLK4KfNfuQ","lengthSeconds":225,"viewCount":584,"keywords":[],"thumbnails":[{"url":"https://i.yt
+img.com/vi_webp/aBSAouM7iaE/default.webp","width":120,"height":90},{"url":"https://i.ytimg.com/vi_we
+bp/aBSAouM7iaE/mqdefault.webp","width":320,"height":180},{"url":"https://i.ytimg.com/vi_webp/aBSAouM
+7iaE/hqdefault.webp","width":480,"height":360},{"url":"https://i.ytimg.com/vi_webp/aBSAouM7iaE/sddef
+ault.webp","width":640,"height":480}],"isLiveContent":false} ## Description ## Text We've diagnosed
+the root cause. Now, we need to articulate it clearly in a way that aligns your team, grounds the
+project, and keeps everyone focused on the right problem. That's what a good problem statement does.
+A useful way to write one is the four C's framework: clarity, consequence, cause, and confirmation.
+Clarity is where you define the problem precisely. Who are the people affected? What are they trying
+to do? What's broken about the current experience? How severe is the problem? How many people and
+how often? Consequence addresses what happens if you don't solve this. Every problem statement
+should carry a sense of stakes. If the answer is not much, it may not be worth solving. Cause can
+expect the five whys work. Why does this problem exist? A good problem statement doesn't just
+describe what's wrong. It points to what's right. Confirmation grounds everything in data. What
+evidence do we have that this problem is real, significant, and worth prioritizing? Together, the
+framework gives you a clear, defensible problem statement. Not a wish list, not a solution in
+disguise. Here's how it might look like when you map it against the four C's. Clarity. Who is
+affected? What are they trying to do? And what's broken? Citizens need to access multiple government
+services each year. To do so, they're required to fill in the same personal information more than 15
+times across different platforms. Each form takes 20 to 30 minutes to complete, and many give up
+before finishing, missing out on benefits they're entitled to. Consequence. What happens if you
+don't fix this? Citizens are losing access to support they qualify for. Trust in government services
+erodes, and the burden falls heaviest on those least equipped to navigate complex processes. Cause.
+Why does this happen? Government services are built independently by different agencies at different
+times. There is no shared data layer, so every service starts from scratch, asking the same
+questions again. Confirmation. Does the data support this? 68% of transactions are abandoned due to
+repeat repeated form-filling frustration. That's approximately 204,000 incomplete transactions out
+of 300,000 annually. Now, there is always one main problem statement covering all four dimensions.
+If there are many, perhaps they should be addressed separately. Notice what changed. The focus
+shifted from the tool to the people, from the technology to the impact. That's the difference a
+proper problem statement makes. The best solutions are built on the clearest problems, not on the
+technology available or the features someone requested, but on the precise, evidence-backed
+understanding of what's actually wrong and who it affects. Before your next project kickoff, try
+writing a problem statement using the 4 C's framework. If you can't complete all four themes, you're
+probably not ready to build yet. Here's the second exercise. For the problem space you've identified
+in the last section, draft a problem statement using all four C's. All four themes in one statement.

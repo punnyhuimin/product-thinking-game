@@ -1,0 +1,35 @@
+Source: https://www.youtube.com/watch?v=DqGP6BvyRdk
+
+# Product Thinking - Introduction (1 of 7) ![Product Thinking - Introduction (1 of
+7)](https://i.ytimg.com/vi_webp/DqGP6BvyRdk/hqdefault.webp) > Retrieved from
+https://www.youtube.com/watch?v=DqGP6BvyRdk on 2026-10-06T02:41:45Z via ytsubs ## Metadata
+{"videoId":"DqGP6BvyRdk","author":"Institute of Digital Government","channelId":"UCzzGo1hm-
+t4uJQLK4KfNfuQ","lengthSeconds":159,"viewCount":840,"keywords":[],"thumbnails":[{"url":"https://i.yt
+img.com/vi_webp/DqGP6BvyRdk/default.webp","width":120,"height":90},{"url":"https://i.ytimg.com/vi_we
+bp/DqGP6BvyRdk/mqdefault.webp","width":320,"height":180},{"url":"https://i.ytimg.com/vi_webp/DqGP6Bv
+yRdk/hqdefault.webp","width":480,"height":360},{"url":"https://i.ytimg.com/vi_webp/DqGP6BvyRdk/sddef
+ault.webp","width":640,"height":480}],"isLiveContent":false} ## Description ## Text You have a
+budget, a team, and a deadline. Your director says, "We need AI." Your team says, "We need a super
+app." Where do you start? The answer is neither. Great digital products don't start with solutions,
+they start with problems. That's what product thinking is about. Welcome to product thinking. This
+course isn't about how to be a product manager. It's not about how to build a product. It's about
+how to solve a problem. And it's not even about finding answers quickly. It's about asking the right
+questions first. The best organizations in the world, they don't just build things. They build the
+right things. As product officers, our job is to solve problems. Increasingly, that involves
+building digital products. But our role isn't just to build the product ourselves. It's to create
+the conditions for our teams to succeed. Three things help us do that. First, focus on the problem,
+not the solution. "We need more AI." "We need a super app." These are solutions dressed up as
+problems. The more useful questions are, "Who are our users? What are they trying to do? And what is
+getting in their way?" Second, chase outcomes, not outputs. A website with five buttons is an
+output. More citizens completing transactions is an outcome. Chase the outcome. Third, integrate
+policy, ops, and tech. No initiative succeeds when these three work in silos. Let's take a look at
+how the world's more successful organizations put this into practice. Grab started with one single
+goal: to make taxis safer, more reliable, and easier to book. Today, it's a super app, but it didn't
+start there. Amazon started with books, one category, and more accessible and more affordable.
+Today, it's the everything store. Netflix started by making DVD rentals cheaper and more reliable.
+Today, it runs sophisticated recommendation algorithms. But the foundation was in technology. It was
+superior operations. The pattern is the same every time. Solve one problem first, then scale. The
+best organizations in the world solve problems, they don't just build solutions. We in the public
+service can do the same. This course covers how we diagnose why problems happen, we will craft a
+sharp problem statement, we find the right metrics, assumptions, and manage risks. Let's begin
+starting with the one.

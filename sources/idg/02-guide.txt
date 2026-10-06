@@ -1,0 +1,34 @@
+[IMG: Institute of Digital Government]
+
+- 
+- 
+- 
+- 
+
+- Home
+- Guides & Resources
+- Product Thinking: Start With The Whys
+
+# Product Thinking: Start With The Whys
+19 May 2026
+
+Learning Pathway:
+
+AI Build 301
+Use the Five Whys Framework to uncover and target the root cause of the problem.
+
+[IMG: Thumbnail for Video for Start with Why]
+## The Five Whys
+Before reaching for a solution, understand why the problem exists. The Five Whys is a simple tool that moves you from symptom to cause.
+[IMG: 5 whys illustration]
+## Choosing the right level to fix
+Problems rarely have one root cause. The goal is to find causes that are within your control and closely connected to the outcome you want to change.
+[IMG: choose right level to fix]
+## Try it out!
+Go through the Five Whys exercise with an existing problem your team is facing.
+[IMG: exercise: think of a problem and ask why 5 times]
+⏭️Next Guide: Craft a Clear Problem Statement↩️Return to - AI 301: Build with AIBack to top
+
+## 
+
+##

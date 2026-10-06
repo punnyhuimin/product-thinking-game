@@ -1,0 +1,47 @@
+Source: https://www.youtube.com/watch?v=wMe7WgWzIe8
+
+# Product Thinking - Design a good customer experience (6 of 7) ![Product Thinking - Design a good
+customer experience (6 of 7)](https://i.ytimg.com/vi_webp/wMe7WgWzIe8/hqdefault.webp) > Retrieved
+from https://www.youtube.com/watch?v=wMe7WgWzIe8 on 2026-10-06T02:41:47Z via ytsubs ## Metadata
+{"videoId":"wMe7WgWzIe8","author":"Institute of Digital Government","channelId":"UCzzGo1hm-
+t4uJQLK4KfNfuQ","lengthSeconds":248,"viewCount":387,"keywords":[],"thumbnails":[{"url":"https://i.yt
+img.com/vi_webp/wMe7WgWzIe8/default.webp","width":120,"height":90},{"url":"https://i.ytimg.com/vi_we
+bp/wMe7WgWzIe8/mqdefault.webp","width":320,"height":180},{"url":"https://i.ytimg.com/vi_webp/wMe7WgW
+zIe8/hqdefault.webp","width":480,"height":360},{"url":"https://i.ytimg.com/vi_webp/wMe7WgWzIe8/sddef
+ault.webp","width":640,"height":480}],"isLiveContent":false} ## Description ## Text We now have a
+problem statement, useful metrics, and a handle on our risks. Now for another key aspect to think
+of. What does it actually feel like to use what we build? Good customer experience isn't a nice
+have. It's especially important when our services are compulsory because citizens don't have options
+to go elsewhere. The best digital experiences share one quality. The product does the thinking so
+the user doesn't have to. If your service requires a lengthy tutorial to navigate, it's a signal.
+It's not about your users, it's about your design. Two government products illustrate this well.
+Parking SG calculates parking fees automatically so I don't have to guess how long I'll take. It
+lets me extend my sessions remotely so I don't have to rush back to my car. It refunds partial
+sessions so I never get penalized for leaving early. Each of these features solves a specific
+problem and real frustration. The result is an experience that's 10 times better than what came
+before. Redeem SG serves three different users at once. Campaign organizers, consumers, and
+merchants, each with different needs and different definitions of a good experience. The team
+couldn't make everyone equally happy, but it's about understanding the core problem to solve for
+each one to make smart trade-offs. Get the essentials right first and build a road map for
+everything else. That clarity is what enabled them to deliver value quickly. A useful tool for
+thinking about this is Airbnb's 11-star framework. An exercise that helps us calibrate what good
+might look like and feel like by pushing beyond what we normally consider acceptable. Here is how it
+works. Let's start at one star. You knock at the door, the one answers. Two stars is when you wait
+20 minutes for the host to show up. Often, when users give five stars, all they mean is I knocked,
+someone opened the door, and they let me in. That's the baseline. Let's keep going. If a user gives
+six out of five stars, perhaps it's because the host welcomed you warmly, showed you around, the
+place is clean and well stocked. Seven stars, the host learns that you like surfing, leaves a
+surfboard and a car, and recommends you the best local restaurants. Let's push further. Eight stars,
+a private chef. Nine stars, a personalized itinerary waiting on the table. 10 stars, a limousine
+from the airport, a press conference at the door. 11 stars, Elon Musk shows up at the game and tells
+you you're going to space. Now, the 10 and 11 star experiences aren't the goal. They're a prompt.
+Somewhere between five and 11 stars lies an experience that's genuinely worth building and feasible.
+The exercise forces us to think beyond good enough and to find out what's both ambitious and
+achievable. Airbnb apply this thinking directly into their product. They rate hosts on friendliness,
+accuracy, check-in, communications, and location. And they surface super hosts, so that guests can
+find great experience without having to search too hard. The product does the work. Good design
+means that the product thinks so the user doesn't have to. This standard applies whether your
+service is optional or mandatory. Perhaps especially so when it's mandatory. Here's your exercise.
+For the problem statements, what does an 11-star experience look like? Walk through the framework,
+then ask yourself what you can realistically deliver and what would get you closest to it. In the
+next section, we bring the whole one team together.

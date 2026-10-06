@@ -1,0 +1,35 @@
+[IMG: Institute of Digital Government]
+
+- 
+- 
+- 
+- 
+
+- Home
+- Guides & Resources
+- Product Thinking: A good customer experience.
+
+# Product Thinking: A good customer experience.
+21 May 2026
+
+Learning Pathway:
+
+AI Build 301
+We have a problem statement, metrics, and a handle on risk. Now, what does it actually feel like to use what we build?
+
+[IMG: Thumbnail for Product Thinking - Design a good customer experience (6 of 7)]
+## Good customer experience
+Good customer experience isn't a nice-to-have, it's necessary. This matters especially for essential public services, where people may not have alternatives.
+[IMG: Design principle: produc thinks for the user, solve specific frustrations, make smart trade offs, especially when its mandatory]
+## Examples in Government
+Strong government digital products often start by addressing a specific, real problem for users.
+[IMG: use cases: ParkingSG, RedeemSG]
+## 11-star framework
+The 11-star framework is a way to stretch our thinking by imagining an exceptionally good customer experience, then working backwards to what is realistically worth building.
+[IMG: 11 star framework]
+[IMG: reflection exercise]
+⏭️Next Guide: Key Takeaways↩️Return to - AI 301: Build with AIBack to top
+
+## 
+
+##

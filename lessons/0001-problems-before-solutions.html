@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1 · Problems before solutions</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+
+<p class="kicker">Product Thinking · Lesson 1 · IDG Guide 1 · ~8 minutes</p>
+<h1>Problems before solutions</h1>
+<p class="subtitle">How to tell when someone is pitching a solution instead of describing a problem, and what to ask instead.</p>
+
+<p><strong>By the end you'll be able to</strong> look at a project idea and say whether it starts from a problem or a solution. You'll also be able to tell whether its success measure is an <em>output</em> or an <em>outcome</em>.</p>
+
+<h2>Where do you start?</h2>
+
+<p>IDG opens the pathway with this scenario: <em>"You have a budget, a team, and a deadline. Your director says, 'We need AI.' Your team says, 'We need a super app.' Where do you start?"</em></p>
+<p>IDG's answer: <strong>"neither."</strong><span class="sidenote">All quotes in this lesson come from IDG's <a href="https://www.youtube.com/watch?v=DqGP6BvyRdk">Guide 1 video</a> unless marked otherwise. A transcript is saved at <code>sources/idg/transcripts/01-transcript.txt</code>.</span></p>
+
+<p class="key">"Great digital products don't start with solutions, they start with problems."
+<cite>IDG, <a href="https://www.idg.gov.sg/guides-and-resources/productthinking1/">Guide 1: Understanding the Problem</a></cite></p>
+
+<p>"We need AI" and "we need a super app" are what IDG calls <strong>"solutions dressed up as problems."</strong> They name a technology before anyone has said what's going wrong, or for whom. IDG suggests asking three questions instead:</p>
+
+<ol>
+  <li>Who are our users?</li>
+  <li>What are they trying to do?</li>
+  <li>What is getting in their way?</li>
+</ol>
+
+<p>If a statement answers those three questions, it describes a problem. If it skips straight to a tool, it's a solution in disguise.</p>
+
+<p>Why this matters: a team that skips problem definition risks building something that IDG describes as <em>"on time, on budget, but completely unhelpful."</em><span class="sidenote">From the <a href="https://www.youtube.com/watch?v=wdzcM6ax5YY">Guide 2 video</a>.</span></p>
+
+<h2>IDG's three principles</h2>
+
+<p>IDG says "three things help us" create the conditions for teams to succeed:</p>
+<ol>
+  <li><strong>Focus on the problem, not the solution.</strong> The idea above.</li>
+  <li><strong>Chase outcomes, not outputs.</strong> More on this below.</li>
+  <li><strong>Integrate policy, ops, and tech.</strong> "No initiative succeeds when these three work in silos." Policy sets the rules, operations runs the service, and tech builds the systems. They have to work as one team.<span class="sidenote">In <a href="https://www.youtube.com/watch?v=_iZNhzdLd7A">Guide 5</a>, IDG adds that this team needs "actual levers to act" and "clear accountabilities for each role".</span></li>
+</ol>
+
+<h3>Output or outcome?</h3>
+<p class="key">"A website with five buttons is an output. More citizens completing transactions is an outcome."</p>
+<p>An <strong>output</strong> is something your team <em>produces</em>: an app, a feature, a training session. An <strong>outcome</strong> is the <em>change</em> that results for people. Outputs are easy to count, but outcomes are what IDG asks you to chase. Success is <em>"the change achieved, not the features delivered."</em><span class="sidenote">IDG learning objective 2, on the <a href="https://www.idg.gov.sg/product-thinking/">overview page</a>.</span></p>
+
+<h3>Start narrow</h3>
+<p>IDG's examples: <strong>Grab</strong> started with one goal, making taxis "safer, more reliable, and easier to book". <strong>Amazon</strong> started with books. <strong>Netflix</strong> started by making DVD rentals cheaper and more reliable. Each is huge today, but IDG's point is: <em>"Solve one problem first, then scale."</em></p>
+
+<h2>Practice</h2>
+
+<div class="activity">
+  <p class="label">Practice 1 · Problem or solution?</p>
+  <p>Decide whether each statement starts from a problem or from a solution. Some come straight from IDG's own examples.</p>
+  <div id="sort-problem"></div>
+</div>
+
+<div class="activity">
+  <p class="label">Practice 2 · Output or outcome?</p>
+  <p>Each line is a proposed measure of success. Is it an output or an outcome?</p>
+  <div id="sort-outcome"></div>
+</div>
+
+<div class="activity">
+  <p class="label">Practice 3 · Rewrite it</p>
+  <div id="rewrite"></div>
+</div>
+
+<h2>Before you go: recall</h2>
+<div class="activity">
+  <p class="label">From memory</p>
+  <div id="recall"></div>
+</div>
+<p>Come back tomorrow and try that recall box again before starting Lesson 2. The slight struggle to remember is what makes it stick.</p>
+
+<div class="source-box">
+  <div class="label">Primary source</div>
+  Watch IDG's <a href="https://www.youtube.com/watch?v=DqGP6BvyRdk">Guide 1 video</a> (under 3 minutes), then skim the <a href="https://www.idg.gov.sg/guides-and-resources/productthinking1/">Guide 1 page</a>.
+</div>
+
+<div class="ask-box">
+  <div class="label">Stuck? Ask</div>
+  Anything unclear? Ask Claude in your terminal, for example: <em>"Is 'reduce hotline calls' a problem or an outcome?"</em> or <em>"Check my rewrite from Practice 3."</em>
+</div>
+
+<nav class="lesson-nav">
+  <a href="../reference/product-thinking-map.html">Reference: Product Thinking Map</a>
+  <span class="soon">Next: Lesson 2 · The Five Whys (coming soon)</span>
+</nav>
+
+</main>
+
+<script src="../assets/components.js"></script>
+<script>
+Sorter.mount('#sort-problem', {
+  buckets: ['Problem-first', 'Solution-first'],
+  items: [
+    { text: '"We are not using enough AI."', answer: 'Solution-first',
+      why: 'IDG uses this exact example: "AI is often a means to an end, not an end in itself." The real issue might be that officers struggle to make decisions from large, messy data sets. (Guide 2)' },
+    { text: '"We don\'t have a CRM platform."', answer: 'Solution-first',
+      why: 'Another IDG example. "But why do we need one?" The real issue might be cumbersome processes causing long wait times for citizens. (Guide 2)' },
+    { text: '"Many elderly residents miss clinic appointments because reminders only go out by email."', answer: 'Problem-first',
+      why: 'It answers who (elderly residents), what they\'re trying to do (attend appointments) and what\'s in the way (email-only reminders).' },
+    { text: '"Let\'s build a dashboard so managers can see all the case data."', answer: 'Solution-first',
+      why: 'A dashboard is a tool. What are managers trying to do, and what\'s getting in their way?' },
+    { text: '"Small businesses abandon the licence application halfway and call the hotline instead."', answer: 'Problem-first',
+      why: 'It describes users struggling with a task, without assuming a fix.' },
+    { text: '"Citizens fill in the same personal details on form after form across different agencies."', answer: 'Problem-first',
+      why: 'This is the basis of IDG\'s own worked example in Guide 3. You\'ll sharpen it with the 4Cs later.' }
+  ]
+});
+
+Sorter.mount('#sort-outcome', {
+  buckets: ['Output', 'Outcome'],
+  items: [
+    { text: 'Launched a website with five buttons.', answer: 'Output',
+      why: 'IDG\'s own example of an output. Something produced, not a change for anyone.' },
+    { text: 'More citizens complete their transactions.', answer: 'Outcome',
+      why: 'IDG\'s own example of an outcome. People\'s situation changed.' },
+    { text: 'Trained 200 officers on the new system.', answer: 'Output',
+      why: 'Activity completed. The outcome is whatever changes because they were trained.' },
+    { text: 'Fewer applicants need to call the hotline to finish a form.', answer: 'Outcome',
+      why: 'It measures the change for users, not what was built.' },
+    { text: 'Released 12 new features this quarter.', answer: 'Output',
+      why: 'Counting "features delivered" instead of "change achieved".' }
+  ]
+});
+
+Recall.mount('#rewrite', {
+  prompt: 'Rewrite this solution-first idea as a <strong>problem-first</strong> statement by answering IDG\'s three questions (who, trying to do what, what\'s in the way) without naming any technology.<br><br><em>"We need an AI chatbot to answer questions about the grants scheme."</em>',
+  placeholder: 'Who are the users? What are they trying to do? What\'s getting in their way?',
+  answerHtml: '<p><strong>One possible rewrite:</strong> "Applicants (who) are trying to get a grant (what they\'re doing), but the form is confusing, so many submit incomplete applications that officers send back (what\'s in the way)."</p><p>This could be fixed several ways: a simpler form, clearer wording, a checklist, or maybe a chatbot. In Lesson 2 you\'ll see IDG dig into this exact grants example with the Five Whys. The root cause turns out to be a form "full of internal jargon".</p>',
+  checks: [
+    'I named who the users are.',
+    'I said what they\'re trying to do.',
+    'I said what\'s getting in their way.',
+    'I didn\'t mention a technology or feature.'
+  ]
+});
+
+Recall.mount('#recall', {
+  prompt: 'Without scrolling up, write IDG\'s <strong>three principles</strong> and its <strong>three questions</strong> for finding the problem.',
+  answerHtml: '<p><strong>Principles</strong></p><ul><li>Focus on the problem, not the solution</li><li>Chase outcomes, not outputs</li><li>Integrate policy, ops, and tech</li></ul><p><strong>Questions</strong></p><ul><li>Who are our users?</li><li>What are they trying to do?</li><li>What is getting in their way?</li></ul>',
+  checks: ['I got all three principles.', 'I got all three questions.']
+});
+</script>
+</body>
+</html>

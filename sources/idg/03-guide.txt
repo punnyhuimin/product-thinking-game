@@ -1,0 +1,34 @@
+[IMG: Institute of Digital Government]
+
+- 
+- 
+- 
+- 
+
+- Home
+- Guides & Resources
+- Product Thinking: Craft a Clear Problem Statement
+
+# Product Thinking: Craft a Clear Problem Statement
+22 May 2026
+
+Learning Pathway:
+
+AI Build 301
+Learn to use the 4Cs framework to structure a clear problem statement.
+
+[IMG: Thumbnail for Video]
+## The 4Cs framework
+We've found the root cause. Now we need to articulate it clearly, in a way that aligns the team and keeps everyone focused on the right problem.
+[IMG: 4Cs: Clarity, Consequence, Cause, Confirmation]
+## Worked Example
+Let's use an example of citizens needing to repeatedly fill forms across government services. 
+[IMG: Elaboration of the 4Cs on the example of repeated form filling across government services]
+## Try it!
+For the problem you identified, draft a problem statement for it using the 4Cs. 
+[IMG: Exercise: draft your own problem statement]
+⏭️Next Guide: Metrics↩️Return to - AI 301: Build with AIBack to top
+
+## 
+
+##

@@ -1,0 +1,33 @@
+[IMG: Institute of Digital Government]
+
+- 
+- 
+- 
+- 
+
+- Home
+- Guides & Resources
+- Product Thinking: Understanding the Problem
+
+# Product Thinking: Understanding the Problem
+19 May 2026
+
+Learning Pathway:
+
+AI Build 301
+Learn why great digital solutions start with problems, not technologies.
+
+[IMG: Thumbnail for Video for Understanding the Problem to be Solved]
+## Great digital products start with problems, not solutions.
+Projects can struggle even when execution is strong, especially when they are solving the wrong problem. The key is to diagnose the real problem first, then decide what to build.
+[IMG: examples of poor problem statements]
+## Three principles help us do better 
+[IMG: 3 principles: focus on the problem, chase outcomes, integrate policy ops tech]
+## The pattern of successful products
+Many successful products started by solving a specific problem for a defined group of users, then expanded over time.
+[IMG: Examples of successful organisations, Grab, Amazon and Netflix]
+⏭️Next Guide: Start With The Whys↩️Return to - AI 301: Build with AIBack to top
+
+## 
+
+##

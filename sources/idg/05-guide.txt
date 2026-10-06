@@ -1,0 +1,39 @@
+[IMG: Institute of Digital Government]
+
+- 
+- 
+- 
+- 
+
+- Home
+- Guides & Resources
+- Product Thinking: Assumptions and Risks
+
+# Product Thinking: Assumptions and Risks
+19 May 2026
+
+Learning Pathway:
+
+AI Build 301
+Learn to surface, stress-test, and de-risk assumptions early.
+
+[IMG: Thumbnail for Product Thinking - Testing assumptions and mitigating risks (5 of 7)]
+## Types of Risk
+We have a problem statement and metrics. Before we build anything, we need to ask: what could go wrong, and what's the cheapest way to find out? Let's look at three common types of risk digital products can face.
+[IMG: TYPES OF RISK]
+## Four Stages of De-risking
+One practical way to de-risk is to build and test in stages: proof of concept, proof of value, scale and maturity.
+[IMG: 4STAGES OF DEERISKING]
+## De-risking Strategies
+To address market risk: get your product in front of real users as early as possible.  
+
+The Singapore health appointment booking system started as a FormSG form feeding into an Excel sheet. This is not scalable, but it was the lowest-cost way to validate the approach. An A/B test showed zero bookings from the control group versus 24 from the treatment group, with users sharing the link unprompted. One variable. Clear result.
+[IMG: case study health appointment system]
+To address technical risk: start small. A proof of concept doesn't need to be scalable, it just needs to be testable. The goal is to find out whether the solution works before committing to building it properly.
+To address team risk: structure for speed, focus, and flexibility, with policy, ops, and tech expertise in one room, and clear accountability for every role.
+[IMG: MOD5 REFLECTION]
+⏭️Next Guide: A Good Customer Experience↩️Return to - AI 301: Build with AIBack to top
+
+## 
+
+##

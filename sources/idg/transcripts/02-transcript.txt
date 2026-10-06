@@ -1,0 +1,41 @@
+Source: https://www.youtube.com/watch?v=wdzcM6ax5YY
+
+# Product Thinking - Starting With the Why (2 of 7) ![Product Thinking - Starting With the Why (2 of
+7)](https://i.ytimg.com/vi_webp/wdzcM6ax5YY/hqdefault.webp) > Retrieved from
+https://www.youtube.com/watch?v=wdzcM6ax5YY on 2026-10-06T02:41:45Z via ytsubs ## Metadata
+{"videoId":"wdzcM6ax5YY","author":"Institute of Digital Government","channelId":"UCzzGo1hm-
+t4uJQLK4KfNfuQ","lengthSeconds":208,"viewCount":613,"keywords":[],"thumbnails":[{"url":"https://i.yt
+img.com/vi_webp/wdzcM6ax5YY/default.webp","width":120,"height":90},{"url":"https://i.ytimg.com/vi_we
+bp/wdzcM6ax5YY/mqdefault.webp","width":320,"height":180},{"url":"https://i.ytimg.com/vi_webp/wdzcM6a
+x5YY/hqdefault.webp","width":480,"height":360},{"url":"https://i.ytimg.com/vi_webp/wdzcM6ax5YY/sddef
+ault.webp","width":640,"height":480}],"isLiveContent":false} ## Description ## Text Before we dive
+into solutions, we need to understand why a problem exists in the first place. Not just at the
+surface, but at the root. A simple but powerful tool for this is the five whys exercise. The premise
+is straightforward. Start with a problem you can observe, then ask why five times. Each answer peels
+back a layer, moving you from symptom to cause. Many government digital products start in the wrong
+place. They begin with a solution in mind. We've heard requests like these. We are not using enough
+AI. AI is often a means to an end, not an end in itself. The real issue might be that officers
+struggle to make decisions from large unruly data sets. We might hear that we don't have a CRM
+platform. But why do we need one? The real issue might be cumbersome processes causing long wait
+times for citizens. Our product is reaching end of life. But what's really at stake is that some
+citizens and officers will lose access to some critical service. When we skip proper problem
+definition, we risk building the wrong thing entirely. On time, on budget, but completely unhelpful.
+Here's a simple example to illustrate the five whys in action. Suppose you were late to work late
+this morning. Why? You were late for work. Why were you late? You woke up late. Because your alarm
+didn't go off because the battery was flat because you forgot to replace it. The fix isn't a new
+alarm clock. It's replacing the battery. A small intervention solves the entire problem. Now let's
+apply this to a government context. Applicants can't access grants. Why? Because applications are
+taking too long to process. Officers are spending too much time going back and forth with applicant
+applicants. Applications are com- coming in incomplete because the form is full of internal jargon
+because it wasn't designed around how the agency works, but how applicants think. The last answer
+here is the real problem to solve. Not processing time, not back and forth, the simple form itself.
+In practice, problems rarely have a single root cause. There are usually several contributing
+factors, and that's okay. Strike a balance between a meaningful and achievable problem, closer to
+the root cause, and within time and resource constraints. The goal isn't to find a perfect answer.
+It's to identify the causes that are within your control and strongly connected to the outcomes you
+want to achieve. Before any initiative, start with the why. The five whys exercise gets you past the
+surface-level problems and closer to the real one. You don't always have to fix the last why in the
+chain. Focus on the ones within your control. Here's the first exercise. Think of a problem that
+your division is currently facing. Ask why five times, and figure out which reasons sit within your
+sphere of influence. In the next section, we'll take what we've uncovered and turn it into a clear
+well-crafted problem statement.
