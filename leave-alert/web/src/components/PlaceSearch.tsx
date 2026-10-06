@@ -35,7 +35,13 @@ export function PlaceSearch({ control, value, placeholder, onPick }: Props) {
         setResults(res.data);
         setNote(res.data.length ? "" : "No matches. Try a street name or postal code.");
       } else {
-        setNote(res.kind === "offline" ? "Search is unavailable: the backend isn't running." : `Search failed: ${res.message}`);
+        setNote(
+          res.kind === "offline"
+            ? "Search is unavailable: the backend isn't running."
+            : res.kind === "unlinked"
+              ? "Search needs a linked browser: send /web to the bot."
+              : `Search failed: ${res.message}`,
+        );
       }
     }, 300);
     return () => {

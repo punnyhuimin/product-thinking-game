@@ -53,12 +53,13 @@ Server imports use explicit `.ts` extensions (`import ... from "./trip.ts"`), wh
 
 ## leave-alert/ architecture
 
-- **Server state is in memory and allows one trip at a time** (`server/index.ts`). A restart loses the trip. Only one Telegram chat can use the bot: `TELEGRAM_CHAT_ID`, or the first private chat to message it.
-- **Loop**: `setInterval(tick, POLL_SECONDS)` → `checkTrip` (LTA bus arrival at the first transit stop plus a data.gov.sg rain forecast) → `computeLeaveTime` → `nextAlert` decides between heads-up, update (leave time moved ≥3 min) and go → Telegram message.
-- **Pure logic is kept separate from I/O so it can be tested**: `leaveTime.ts`, `alerts.ts`, `route.ts` (parses OneMap itineraries into legs), `weather.ts` and `bot.ts`. The bot's conversation state machine takes a `BotDeps` object for side effects, so tests pass fakes. The API clients are `onemap.ts` (routing and search; renews its token from email and password), `lta.ts` and `telegram.ts`.
+- **Each allowed Telegram user has at most one trip, held in memory** (`server/trips.ts`, keyed by chat id; in a private chat that is the user id). A restart loses every trip. Only the ids in `TELEGRAM_ALLOWED_IDS` (falling back to `TELEGRAM_CHAT_ID`) can use the bot; the server won't start without one.
+- **Loop**: `setInterval(trips.tick, POLL_SECONDS)` → for each trip, `checkTrip` (LTA bus arrival at the first transit stop plus a data.gov.sg rain forecast) → `computeLeaveTime` → `nextAlert` decides between heads-up, update (leave time moved ≥3 min) and go → Telegram message to that trip's chat. One trip's failed check is stored as its error and doesn't stop the others.
+- **Pure logic is kept separate from I/O so it can be tested**: `leaveTime.ts`, `alerts.ts`, `route.ts` (parses OneMap itineraries into legs), `weather.ts`, `link.ts`, `trips.ts` (takes fake `check`/`send` in tests) and `bot.ts`. The bot's conversation state machine takes a `BotDeps` object for side effects, so tests pass fakes. The API clients are `onemap.ts` (routing and search; renews its token from email and password), `lta.ts` and `telegram.ts`.
 - **How Telegram updates arrive**: if `PUBLIC_URL`, or `RENDER_EXTERNAL_URL` (which Render sets), is set, the server registers a webhook at `/telegram` with a secret derived from the bot token. Otherwise it long-polls. While the deployed webhook is active, a local server long-polling with the same bot token gets HTTP 409 and receives no bot messages.
 - **HTTP API**: `GET /api/search?q=`, `POST /api/trip`, `GET /api/trip`, `GET /healthz`. CORS is limited to `ALLOWED_ORIGIN`. The `POST /api/trip` payload is validated by `parseTrip` in `server/trip.ts` and must match `web/src/trip/types.ts`.
-- **Web**: `web/src/trip/api.ts` returns `ok | offline | error` results. `VITE_API_BASE` sets the backend origin in production; it is empty in dev, where the Vite proxy handles `/api`.
+- **Web sign-in**: every `/api/` route needs `Authorization: Bearer <key>` and answers 401 without it. The bot's `/web` command replies with `WEB_URL?key=<chatId>.<hmac>` (`server/link.ts`; the secret is derived from the bot token, so rotating the token signs every browser out). `web/src/trip/link.ts` moves the key from the URL into `localStorage`. A key only works while its id is in the allowlist.
+- **Web**: `web/src/trip/api.ts` returns `ok | offline | unlinked | error` results. `VITE_API_BASE` sets the backend origin in production; it is empty in dev, where the Vite proxy handles `/api`.
 
 ## Deployment
 

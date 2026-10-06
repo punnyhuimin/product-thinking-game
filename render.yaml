@@ -27,8 +27,10 @@ services:
         sync: false
       - key: TELEGRAM_BOT_TOKEN
         sync: false
-      - key: TELEGRAM_CHAT_ID
+      - key: TELEGRAM_ALLOWED_IDS
         sync: false
+      - key: WEB_URL
+        value: https://punnyhuimin.github.io/product-thinking-game/
       - key: ONEMAP_EMAIL
         sync: false
       - key: ONEMAP_PASSWORD

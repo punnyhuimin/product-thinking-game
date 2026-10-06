@@ -9,6 +9,10 @@ import { validateTrip } from "./trip/validate";
 type Status = { kind: "good" | "info" | "bad"; text: string } | null;
 
 const OFFLINE: Status = { kind: "info", text: "The backend isn't running, so we can't plan routes or send alerts yet." };
+const UNLINKED: Status = {
+  kind: "info",
+  text: "Link this browser to Telegram first: send /web to the Leave Alert bot and open the link it replies with.",
+};
 
 export function App() {
   const [values, setValues] = useState(EMPTY_FORM);
@@ -16,6 +20,7 @@ export function App() {
   const [status, setStatus] = useState<Status>(null);
   const [trip, setTrip] = useState<TripView | null>(null);
   const [busy, setBusy] = useState(false);
+  const [unlinked, setUnlinked] = useState(false);
 
   // Show the active trip on load. ?mock swaps in sample data for working without the backend.
   useEffect(() => {
@@ -32,6 +37,10 @@ export function App() {
       else if (res.kind === "ok" && res.data.error) setStatus({ kind: "bad", text: `Couldn't load your trip: ${res.data.error}` });
       else if (res.kind === "error") setStatus({ kind: "bad", text: `Couldn't load your trip: ${res.message}` });
       else if (res.kind === "offline") setStatus(OFFLINE);
+      else if (res.kind === "unlinked") {
+        setUnlinked(true);
+        setStatus(UNLINKED);
+      }
     })();
     return () => {
       cancelled = true;
@@ -61,6 +70,9 @@ export function App() {
     if (saved.kind === "ok") {
       setTrip(saved.data);
       setStatus({ kind: "good", text: "Trip saved. We'll text you on Telegram when it's time to leave." });
+    } else if (saved.kind === "unlinked") {
+      setUnlinked(true);
+      setStatus(UNLINKED);
     } else {
       setStatus(saved.kind === "error" ? { kind: "bad", text: `Couldn't set up alerts: ${saved.message}` } : OFFLINE);
     }
@@ -81,7 +93,7 @@ export function App() {
       </div>
       {trip ? (
         <TripDetails trip={trip} onPlanAnother={planAnother} />
-      ) : (
+      ) : unlinked ? null : (
         <TripForm values={values} errors={errors} busy={busy} onChange={onChange} onSubmit={onSubmit} />
       )}
     </main>

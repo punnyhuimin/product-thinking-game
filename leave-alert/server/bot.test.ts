@@ -34,16 +34,18 @@ test("rejects things that aren't times", () => {
 function harness(results: Place[] = [place("Orchard MRT"), place("Orchard Road")]) {
   const sent: Reply[] = [];
   const saved: Trip[] = [];
+  const asked: string[] = []; // which chat each trip call was made for
   const bot = createBot({
     send: async (_id, r) => void sent.push(r),
     search: async () => results,
-    saveTrip: async (t) => void saved.push(t),
-    status: () => null,
-    cancelTrip: () => false,
+    saveTrip: async (id, t) => void (saved.push(t), asked.push(`save ${id}`)),
+    status: (id) => (asked.push(`status ${id}`), null),
+    cancelTrip: (id) => (asked.push(`cancel ${id}`), false),
+    webLink: (id) => `https://web.example/?key=${id}.sig`,
     now: () => now,
   });
   const lastPick = () => sent.findLast((r) => r.keyboard)!.keyboard![0][0].callback_data;
-  return { bot, sent, saved, lastPick };
+  return { bot, sent, saved, asked, lastPick };
 }
 
 test("plans a trip from search picks and a time", async () => {
@@ -94,4 +96,25 @@ test("no matches and no session get helpful replies", async () => {
   assert.match(sent.at(-1)!.text, /No matches/);
   await bot.onText(1, "/cancel");
   assert.match(sent.at(-1)!.text, /Stopped planning/);
+});
+
+test("trip commands act on the chat that sent them", async () => {
+  const { bot, asked, lastPick } = harness();
+  await bot.onText(7, "/trip");
+  await bot.onText(7, "orchard");
+  await bot.onPick(7, lastPick());
+  await bot.onText(7, "orchard");
+  await bot.onPick(7, lastPick());
+  await bot.onText(7, "18:30");
+  await bot.onText(8, "/status");
+  await bot.onText(9, "/cancel");
+  assert.deepEqual(asked, ["save 7", "status 8", "cancel 9"]);
+});
+
+test("/web replies with a link for this chat", async () => {
+  const { bot, sent } = harness();
+  await bot.onText(42, "/web");
+  assert.match(sent.at(-1)!.text, /https:\/\/web\.example\/\?key=42\.sig/);
+  await bot.onText(42, "/help");
+  assert.match(sent.at(-1)!.text, /\/web/);
 });

@@ -12,10 +12,12 @@ export type Reply = { text: string; keyboard?: Keyboard };
 export type BotDeps = {
   send(chatId: number, reply: Reply): Promise<void>;
   search(q: string): Promise<Place[]>;
-  // Routes and saves the trip, and sends the confirmation photo itself.
-  saveTrip(trip: Trip): Promise<void>;
-  status(): ReturnType<typeof tripView> | null;
-  cancelTrip(): boolean;
+  // Routes and saves the chat's trip, and sends the confirmation photo itself.
+  saveTrip(chatId: number, trip: Trip): Promise<void>;
+  status(chatId: number): ReturnType<typeof tripView> | null;
+  cancelTrip(chatId: number): boolean;
+  // A web app link that signs this browser in as the chat.
+  webLink(chatId: number): string;
   now?(): Date;
 };
 
@@ -27,7 +29,8 @@ type Session =
 
 const HELP =
   "I work out when you need to leave and message you before then.\n\n" +
-  "/trip - plan a trip\n/status - show the current trip\n/cancel - stop planning, or cancel the current trip";
+  "/trip - plan a trip\n/status - show the current trip\n/cancel - stop planning, or cancel the current trip\n" +
+  "/web - get a link to plan trips in your browser";
 const ASK_FROM = "Where are you starting from? Send a place, address or postal code, or share your location.";
 const ASK_TO = "Where are you going?";
 const ASK_TIME = `What time do you need to arrive? e.g. 18:30 or 6:30pm.\nAdd +15 for a 15 min safety buffer (default ${DEFAULT_BUFFER_MIN}).`;
@@ -97,11 +100,15 @@ export function createBot(deps: BotDeps) {
         sessions.set(chatId, { step: "from", list: 0, options: [] });
         return deps.send(chatId, { text: ASK_FROM });
       case "/status":
-        return deps.send(chatId, { text: formatStatus(deps.status()) });
+        return deps.send(chatId, { text: formatStatus(deps.status(chatId)) });
       case "/cancel":
         if (sessions.delete(chatId)) return deps.send(chatId, { text: "Stopped planning. Send /trip to start again." });
-        if (deps.cancelTrip()) return deps.send(chatId, { text: "Trip cancelled. No more alerts for it." });
+        if (deps.cancelTrip(chatId)) return deps.send(chatId, { text: "Trip cancelled. No more alerts for it." });
         return deps.send(chatId, { text: "Nothing to cancel." });
+      case "/web":
+        return deps.send(chatId, {
+          text: `Open this to plan trips in your browser:\n${deps.webLink(chatId)}\n\nThe link signs that browser in as you, so don't share it.`,
+        });
       default:
         return deps.send(chatId, { text: HELP });
     }
@@ -120,7 +127,7 @@ export function createBot(deps: BotDeps) {
     const day = when.tomorrow ? "tomorrow " : "";
     await deps.send(chatId, { text: `Arrive by ${day}${when.arriveBy.slice(11, 16)}. Finding a route...` });
     try {
-      await deps.saveTrip({ from: s.from, to: s.to, arriveBy: when.arriveBy, bufferMin: when.bufferMin });
+      await deps.saveTrip(chatId, { from: s.from, to: s.to, arriveBy: when.arriveBy, bufferMin: when.bufferMin });
     } catch (e) {
       await deps.send(chatId, { text: `Couldn't set the trip: ${(e as Error).message}\nSend /trip to try again.` });
     }
