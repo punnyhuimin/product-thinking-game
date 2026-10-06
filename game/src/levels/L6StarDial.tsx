@@ -3,6 +3,8 @@ import type { LevelProps } from "../screens/LevelShell";
 import { Quote } from "../components/Quote";
 import { Feedback } from "../components/Feedback";
 import { MultiChoice } from "../components/MultiChoice";
+import { PuzzleFrame } from "../components/PuzzleFrame";
+import { P6Tradeoffs } from "./P6Tradeoffs";
 import { BUDGET, CX_QS, STARS } from "../data/l6";
 
 export function L6StarDial({ onMistake, onCorrect, onFinish }: LevelProps) {
@@ -29,12 +31,19 @@ export function L6StarDial({ onMistake, onCorrect, onFinish }: LevelProps) {
     }
   };
 
+  if (stage === 3) {
+    return (
+      <PuzzleFrame title="Release trade-offs" onCorrect={onCorrect} onFinish={onFinish}>
+        {(win) => <P6Tradeoffs onWin={win} />}
+      </PuzzleFrame>
+    );
+  }
   if (stage === 2) {
     return (
       <div className="card">
         <p className="kicker">{q + 1} of {CX_QS.length}</p>
         <MultiChoice key={q} q={CX_QS[q]} onResult={(ok) => (ok ? onCorrect() : onMistake())}
-          onNext={() => (q + 1 < CX_QS.length ? setQ(q + 1) : onFinish())} nextLabel={q + 1 < CX_QS.length ? "Next" : "Finish level"} />
+          onNext={() => (q + 1 < CX_QS.length ? setQ(q + 1) : setStage(3))} nextLabel={q + 1 < CX_QS.length ? "Next" : "To the puzzle"} />
       </div>
     );
   }

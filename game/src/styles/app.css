@@ -105,3 +105,12 @@ kbd { font-family: var(--sans); font-size: .65rem; opacity: .7; border: 1px soli
 .assume { display: flex; justify-content: space-between; gap: .6rem; font-size: .88rem; padding: .45rem .6rem; border-left: 3px solid var(--bad); background: var(--bad-soft); margin: .35rem 0; border-radius: 4px; }
 .assume.ok { border-left-color: var(--good); background: var(--good-soft); }
 .pts { font-family: var(--sans); font-size: .75rem; white-space: nowrap; }
+.meter .bar > div { background: var(--muted); transition: width .2s; }
+.meter .bar > div.t { background: var(--good); }
+.gain { font-family: var(--sans); font-size: .7rem; color: var(--muted); }
+.memory { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin: .6rem 0; }
+.mcard { min-height: 5.2rem; font-family: var(--sans); font-size: .68rem; line-height: 1.25; padding: .4rem; border-radius: 8px; border: 1px solid var(--rule); background: var(--accent-soft); color: var(--accent); cursor: pointer; transition: background .2s, transform .2s; }
+.mcard.up { background: var(--card); color: var(--fg); }
+.mcard.tool.up { font-weight: 700; }
+.mcard.got { background: var(--good-soft); border-color: var(--good); color: var(--good); }
+.mcard:hover:not(.got) { transform: translateY(-2px); }
