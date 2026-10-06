@@ -21,7 +21,7 @@ export function L4MetricForge({ onMistake, onCorrect, onFinish }: LevelProps) {
       {stage === 0 && (
         <div className="card">
           <p>Without metrics you are building on instinct. Forge good ones: first spot what makes a metric weak against the five <Term def="Specific, Measurable, Achievable, Relevant, Time-bound.">SMART</Term> properties.</p>
-          <Quote source="IDG Guide 4">Instincts hardly hold up in a funding review.</Quote>
+          <Quote source="IDG Guide 4">Without them, we're building on instinct.</Quote>
           <button className="btn" onClick={() => setStage(1)}>Begin</button>
         </div>
       )}
