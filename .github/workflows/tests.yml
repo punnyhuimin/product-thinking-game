@@ -1,0 +1,28 @@
+name: Unit tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  leave-alert-server:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: leave-alert
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # Match the Node version Render runs (render.yaml).
+          node-version: 24
+      # The server has no dependencies, so there is nothing to install.
+      - run: npm test
