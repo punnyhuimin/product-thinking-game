@@ -1,11 +1,13 @@
 import { createHash } from "node:crypto";
 import { createServer, type IncomingMessage } from "node:http";
 import { createBot } from "./bot.ts";
-import { formatAlert, HEADS_UP_MIN, hhmm, nextAlert, record, weatherLine, type Sent } from "./alerts.ts";
+import { HEADS_UP_MIN, hhmm, weatherLine } from "./alerts.ts";
+import { signLink, verifyLink } from "./link.ts";
 import { getToken, route, search } from "./onemap.ts";
 import { staticMapUrl } from "./staticMap.ts";
 import { answerCallback, editMessage, getUpdates, sendMessage, sendPhoto, setWebhook, type Update } from "./telegram.ts";
-import { checkTrip, parseTrip, tripView, type ActiveTrip, type Snapshot } from "./trip.ts";
+import { checkTrip, parseTrip, tripView } from "./trip.ts";
+import { createTrips } from "./trips.ts";
 
 const PORT = Number(process.env.PORT ?? 8787);
 const POLL_MS = Number(process.env.POLL_SECONDS ?? 60) * 1000;
@@ -18,50 +20,32 @@ const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "";
 const PUBLIC_URL = process.env.PUBLIC_URL ?? process.env.RENDER_EXTERNAL_URL;
 const HOOK_PATH = "/telegram";
 const HOOK_SECRET = createHash("sha256").update(BOT_TOKEN).digest("hex").slice(0, 32);
+// Signs the /web links. Derived from the bot token, so rotating the token signs every browser out.
+const LINK_SECRET = createHash("sha256").update(`web-link:${BOT_TOKEN}`).digest("hex");
+// Where /web links point: the web app's page.
+const WEB_URL = process.env.WEB_URL ?? "http://localhost:5173/";
+// Telegram user ids allowed to use the bot (in a private chat the chat id is the user id).
+const ALLOWED = new Set(
+  (process.env.TELEGRAM_ALLOWED_IDS || process.env.TELEGRAM_CHAT_ID || "").split(",").map((s) => s.trim()).filter(Boolean).map(Number),
+);
 if (!LTA_KEY || !BOT_TOKEN) throw new Error("Set LTA_ACCOUNT_KEY and TELEGRAM_BOT_TOKEN in .env");
-
-// v1 tracks one trip at a time, in memory.
-let trip: ActiveTrip | null = null;
-let sent: Sent = {};
-let last: Snapshot | null = null;
-let lastError: string | null = null;
-// The only chat that may use the bot and get alerts. Without TELEGRAM_CHAT_ID, the first private chat claims it.
-let owner: number | null = Number(process.env.TELEGRAM_CHAT_ID) || null;
-
-function chat(): number {
-  if (owner === null) throw new Error("No chat yet: send your bot any message on Telegram first");
-  return owner;
+if (!ALLOWED.size || [...ALLOWED].some((id) => !Number.isInteger(id))) {
+  throw new Error("Set TELEGRAM_ALLOWED_IDS in .env to a comma-separated list of Telegram user ids");
 }
 
-async function tick() {
-  if (!trip) return;
-  try {
-    last = await checkTrip(trip, LTA_KEY);
-    const now = Date.now();
-    const leaveAt = last.plan.leaveAt.getTime();
-    const kind = nextAlert(sent, leaveAt, now);
-    if (kind) {
-      await sendMessage(BOT_TOKEN, chat(), formatAlert(kind, leaveAt, now, last.context));
-      sent = record(sent, kind, leaveAt);
-    }
-    lastError = null;
-    if (sent.go || now > Date.parse(trip.arriveBy)) trip = null;
-  } catch (e) {
-    lastError = (e as Error).message;
-    console.error("tick failed:", lastError);
-  }
-}
+const trips = createTrips({
+  check: (t) => checkTrip(t, LTA_KEY),
+  send: (chatId, text) => sendMessage(BOT_TOKEN, chatId, text),
+});
 
 // Route roughly an hour before arrival so OneMap uses the right timetable, but never in the past.
 const departGuess = (arriveBy: string) => new Date(Math.max(Date.now(), Date.parse(arriveBy) - 60 * 60_000));
 
-async function saveTrip(body: unknown) {
+async function saveTrip(id: number, body: unknown) {
   const t = parseTrip(body);
   const r = await route(await getToken(ONEMAP), t.from, t.to, departGuess(t.arriveBy));
-  const id = chat();
-  const active: ActiveTrip = { ...t, route: r };
-  const snap = await checkTrip(active, LTA_KEY);
-  [trip, sent, last, lastError] = [active, {}, snap, null];
+  const active = { ...t, route: r };
+  const snap = await trips.start(id, active);
   const caption = `Trip set: ${t.from.label} to ${t.to.label}, arrive by ${hhmm(Date.parse(t.arriveBy))}.\n` +
     `Leave around ${hhmm(snap.plan.leaveAt.getTime())} (${r.totalMin} min journey). ` +
     `I'll message you ${HEADS_UP_MIN} min before.\n` +
@@ -69,20 +53,23 @@ async function saveTrip(body: unknown) {
     `Route: ${snap.context.mapsUrl}`;
   await sendPhoto(BOT_TOKEN, id, staticMapUrl(r, t.from, t.to), caption)
     .catch((e) => (console.error("map photo failed:", e.message), sendMessage(BOT_TOKEN, id, caption)));
-  await tick(); // sends a heads-up straight away if leave time is already close
-  return tripView(active, last ?? snap);
+  await trips.tick(id); // sends a heads-up straight away if leave time is already close
+  return trips.view(id).trip ?? tripView(active, snap);
+}
+
+function webLink(chatId: number) {
+  const url = new URL(WEB_URL);
+  url.searchParams.set("key", signLink(chatId, LINK_SECRET));
+  return url.toString();
 }
 
 const bot = createBot({
   send: (id, r) => sendMessage(BOT_TOKEN, id, r.text, r.keyboard),
   search: async (q) => search(q, await getToken(ONEMAP).catch(() => undefined)),
-  saveTrip: async (t) => void (await saveTrip(t)),
-  status: () => (trip && last ? tripView(trip, last) : null),
-  cancelTrip: () => {
-    const had = trip !== null;
-    [trip, sent, last, lastError] = [null, {}, null, null];
-    return had;
-  },
+  saveTrip: async (id, t) => void (await saveTrip(id, t)),
+  status: (id) => trips.view(id).trip,
+  cancelTrip: (id) => trips.cancel(id),
+  webLink,
 });
 
 let lastUpdateId = 0;
@@ -92,8 +79,9 @@ async function handleUpdate(u: Update) {
   lastUpdateId = u.update_id;
   const c = u.message?.chat ?? u.callback_query?.message?.chat;
   if (c?.type !== "private") return;
-  owner ??= c.id;
-  if (c.id !== owner) return sendMessage(BOT_TOKEN, c.id, "Sorry, this is a private bot.");
+  if (!ALLOWED.has(c.id)) {
+    return sendMessage(BOT_TOKEN, c.id, `Sorry, this is a private bot. Your Telegram id is ${c.id}: ask the owner to add it.`);
+  }
   const m = u.message;
   if (m && Date.now() - m.date * 1000 > 10 * 60_000) return; // stale backlog from while we were down
   if (m?.location) return bot.onLocation(c.id, m.location.latitude, m.location.longitude);
@@ -123,6 +111,13 @@ async function pollTelegram() {
   }
 }
 
+// The allowed chat a web request acts as, from the key its browser got through /web.
+function webChat(req: IncomingMessage): number | null {
+  const key = req.headers.authorization?.match(/^Bearer (\S+)$/)?.[1];
+  const id = key ? verifyLink(key, LINK_SECRET) : null;
+  return id !== null && ALLOWED.has(id) ? id : null;
+}
+
 async function readJson(req: IncomingMessage): Promise<unknown> {
   let raw = "";
   for await (const chunk of req) raw += chunk;
@@ -136,7 +131,7 @@ createServer(async (req, res) => {
   };
   if (ALLOWED_ORIGIN) {
     res.setHeader("access-control-allow-origin", ALLOWED_ORIGIN);
-    res.setHeader("access-control-allow-headers", "content-type");
+    res.setHeader("access-control-allow-headers", "content-type, authorization");
     res.setHeader("vary", "origin");
   }
   if (req.method === "OPTIONS") return void res.writeHead(204).end();
@@ -149,16 +144,22 @@ createServer(async (req, res) => {
       reply(200, { ok: true }); // answer first so Telegram doesn't retry while we route
       return void onUpdate(u);
     }
-    if (url.pathname === "/api/search" && req.method === "GET") {
-      const q = url.searchParams.get("q")?.trim() ?? "";
-      const token = await getToken(ONEMAP).catch(() => undefined);
-      return reply(200, { results: q.length < 2 ? [] : await search(q, token) });
-    }
-    if (url.pathname === "/api/trip" && req.method === "POST") {
-      return reply(200, await saveTrip(await readJson(req)));
-    }
-    if (url.pathname === "/api/trip" && req.method === "GET") {
-      return reply(200, { trip: trip && last ? tripView(trip, last) : null, error: lastError });
+    if (url.pathname.startsWith("/api/")) {
+      const chatId = webChat(req);
+      if (chatId === null) {
+        return reply(401, { ok: false, error: "This browser isn't linked to Telegram. Send /web to the bot and open its link." });
+      }
+      if (url.pathname === "/api/search" && req.method === "GET") {
+        const q = url.searchParams.get("q")?.trim() ?? "";
+        const token = await getToken(ONEMAP).catch(() => undefined);
+        return reply(200, { results: q.length < 2 ? [] : await search(q, token) });
+      }
+      if (url.pathname === "/api/trip" && req.method === "POST") {
+        return reply(200, await saveTrip(chatId, await readJson(req)));
+      }
+      if (url.pathname === "/api/trip" && req.method === "GET") {
+        return reply(200, trips.view(chatId));
+      }
     }
     reply(404, { ok: false, error: "Not found" });
   } catch (e) {
@@ -166,7 +167,7 @@ createServer(async (req, res) => {
   }
 }).listen(PORT, () => console.log(`leave-alert server on http://localhost:${PORT}`));
 
-setInterval(tick, POLL_MS);
+setInterval(() => void trips.tick(), POLL_MS);
 
 if (PUBLIC_URL) {
   setWebhook(BOT_TOKEN, PUBLIC_URL + HOOK_PATH, HOOK_SECRET)

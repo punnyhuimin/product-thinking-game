@@ -1,18 +1,28 @@
+import { getKey } from "./link";
 import type { Place, TripPayload, TripView } from "./types";
 
-// "offline": no backend answered. "error": backend answered but refused, with its reason.
-export type ApiResult<T> = { kind: "ok"; data: T } | { kind: "offline" } | { kind: "error"; message: string };
+// "offline": no backend answered. "unlinked": this browser has no valid /web key.
+// "error": backend answered but refused, with its reason.
+export type ApiResult<T> =
+  | { kind: "ok"; data: T }
+  | { kind: "offline" }
+  | { kind: "unlinked" }
+  | { kind: "error"; message: string };
 
 // Empty in dev (Vite proxies /api); the deployed backend's origin in production builds.
 const API_BASE = (import.meta.env.VITE_API_BASE ?? "").replace(/\/$/, "");
 
 async function request<T>(url: string, init?: RequestInit): Promise<ApiResult<T>> {
+  const key = getKey();
+  const headers = new Headers(init?.headers);
+  if (key) headers.set("Authorization", `Bearer ${key}`);
   let res: Response;
   try {
-    res = await fetch(API_BASE + url, init);
+    res = await fetch(API_BASE + url, { ...init, headers });
   } catch {
     return { kind: "offline" };
   }
+  if (res.status === 401) return { kind: "unlinked" };
   const body = (await res.json().catch(() => null)) as (T & { error?: string }) | null;
   if (res.ok && body) return { kind: "ok", data: body };
   // The Vite proxy answers 5xx with no JSON when the backend is down.
