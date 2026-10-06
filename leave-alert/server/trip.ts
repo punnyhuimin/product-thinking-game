@@ -1,7 +1,7 @@
 import { computeLeaveTime, type LeavePlan } from "./leaveTime.ts";
 import { busWaitMin } from "./lta.ts";
 import { firstTransit, type Place, type Route } from "./route.ts";
-import { fetchRainNear } from "./weather.ts";
+import { fetchLeaveForecast, type LeaveForecast } from "./weather.ts";
 import { googleMapsUrl } from "./googleMaps.ts";
 import type { Context } from "./alerts.ts";
 
@@ -32,27 +32,33 @@ export async function checkTrip(trip: ActiveTrip, ltaKey: string, now = new Date
   const { route } = trip;
   const first = firstTransit(route);
   const bus = first?.mode === "BUS" && first.fromStopCode && first.service ? first : null;
-  const [live, rain] = await Promise.all([
-    bus ? busWaitMin(ltaKey, bus.fromStopCode!, bus.service!, now).catch(() => null) : Promise.resolve(null),
-    fetchRainNear(trip.from.lat, trip.from.lng).catch(() => ({ raining: false, forecast: "Unavailable", rainMm: 0 })),
-  ]);
+  const live = bus ? await busWaitMin(ltaKey, bus.fromStopCode!, bus.service!, now).catch(() => null) : null;
   // Live wait replaces the scheduled first wait; multi-leg trips keep scheduled transfer waits.
   const transitLegs = route.legs.filter((l) => l.mode !== "WALK").length;
   const wait = live === null ? route.waitMin : live + (transitLegs > 1 ? route.waitMin : 0);
-  const plan = computeLeaveTime({
+  const inputs = {
     arriveBy: new Date(trip.arriveBy),
     bufferMin: trip.bufferMin,
     walkToStopMin: route.walkMin,
     busWaitMin: wait,
     rideMin: route.transitMin,
     walkFromStopMin: 0,
-    raining: rain.raining,
-  });
+  };
+  // The forecast depends on the leave time and the leave time on the forecast. Look the forecast up for the
+  // dry leave time, then recompute with rain if it's wet; the wet (earlier) time is the one we report.
+  const dry = computeLeaveTime({ ...inputs, raining: false });
+  const fc = await fetchLeaveForecast(dry.leaveAt.getTime(), trip.from.lat, trip.from.lng).catch(
+    (): LeaveForecast => ({ forecast: "Forecast unavailable", wet: false, area: null, source: "unavailable" }),
+  );
+  const plan = fc.wet ? computeLeaveTime({ ...inputs, raining: true }) : dry;
   const context = {
     toLabel: trip.to.label,
     serviceNo: first?.service ?? "",
     busWaitMin: live,
-    forecast: rain.forecast,
+    forecast: fc.forecast,
+    forecastAt: plan.leaveAt.getTime(),
+    forecastArea: fc.area,
+    forecastSource: fc.source,
     umbrella: plan.umbrella,
     mapsUrl: googleMapsUrl(trip.from, trip.to),
   };
@@ -68,6 +74,13 @@ export function tripView(trip: ActiveTrip, s: Snapshot) {
     bufferMin: trip.bufferMin,
     leaveAt: s.plan.leaveAt.toISOString(),
     route: trip.route,
-    live: { busWaitMin: s.context.busWaitMin, forecast: s.context.forecast, umbrella: s.context.umbrella },
+    live: {
+      busWaitMin: s.context.busWaitMin,
+      forecast: s.context.forecast,
+      forecastAt: new Date(s.context.forecastAt).toISOString(),
+      forecastArea: s.context.forecastArea,
+      forecastSource: s.context.forecastSource,
+      umbrella: s.context.umbrella,
+    },
   };
 }

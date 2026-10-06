@@ -57,5 +57,5 @@ export const MOCK_TRIP: TripView = {
       },
     ],
   },
-  live: { busWaitMin: 4, forecast: "Light Showers", umbrella: true },
+  live: { busWaitMin: 4, forecast: "Light Showers", forecastAt: "2026-10-07T07:49:00+08:00", forecastArea: "Bishan", forecastSource: "two-hour", umbrella: true },
 };

@@ -24,12 +24,18 @@ export type Context = {
   serviceNo: string;
   busWaitMin: number | null;
   forecast: string;
+  forecastAt: number;
+  forecastArea: string | null;
+  forecastSource: string;
   umbrella: boolean;
   mapsUrl: string;
 };
 
 export const hhmm = (ms: number) =>
   new Date(ms).toLocaleTimeString("en-SG", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Singapore" });
+
+export const weatherLine = (forecast: string, at: number, umbrella: boolean) =>
+  `Weather at ${hhmm(at)}: ${forecast}.${umbrella ? " Bring an umbrella." : ""}`;
 
 export function formatAlert(kind: AlertKind, leaveAt: number, now: number, c: Context): string {
   const mins = Math.max(0, Math.round((leaveAt - now) / 60_000));
@@ -39,6 +45,6 @@ export function formatAlert(kind: AlertKind, leaveAt: number, now: number, c: Co
     update: `Change of plan: leave at ${hhmm(leaveAt)} (in ${mins} min) for ${c.toLabel}.`,
   }[kind];
   const bus = c.busWaitMin === null ? `No live arrival for bus ${c.serviceNo}.` : `Bus ${c.serviceNo} in ${c.busWaitMin} min.`;
-  const rain = c.umbrella ? `Weather: ${c.forecast}. Bring an umbrella.` : `Weather: ${c.forecast}.`;
+  const rain = weatherLine(c.forecast, c.forecastAt, c.umbrella);
   return [head, bus, rain, `Route: ${c.mapsUrl}`].join("\n");
 }

@@ -60,3 +60,70 @@ export async function fetchRainNear(lat: number, lng: number): Promise<RainRepor
 export async function forecastAreas(): Promise<string[]> {
   return (await get<Forecast>("two-hr-forecast")).area_metadata.map((a) => a.name);
 }
+
+type Region = "north" | "south" | "east" | "west" | "central";
+export type Forecast24 = {
+  records: {
+    periods: { timePeriod: { start: string; end: string }; regions: Record<Region, { text: string }> }[];
+  }[];
+};
+type TwoHrFeed = Forecast & { items: { valid_period?: { start: string; end: string } }[] };
+
+export type ForecastSource = "two-hour" | "24-hour" | "none" | "unavailable";
+export type LeaveForecast = { forecast: string; wet: boolean; area: string | null; source: ForecastSource };
+
+// Rough centre of each 24-hour forecast region.
+const REGIONS: { name: Region; location: LatLng }[] = [
+  { name: "north", location: { latitude: 1.418, longitude: 103.82 } },
+  { name: "south", location: { latitude: 1.27, longitude: 103.82 } },
+  { name: "east", location: { latitude: 1.335, longitude: 103.96 } },
+  { name: "west", location: { latitude: 1.34, longitude: 103.7 } },
+  { name: "central", location: { latitude: 1.35, longitude: 103.82 } },
+];
+
+export function nearestRegion(p: LatLng): Region {
+  return nearest(REGIONS, p)!.name;
+}
+
+// The period containing a time (start inclusive, end exclusive), for the region nearest a point.
+export function forecast24At(f: Forecast24, ms: number, p: LatLng): { text: string; region: Region } | null {
+  const region = nearestRegion(p);
+  for (const rec of f.records) {
+    for (const per of rec.periods) {
+      if (ms >= Date.parse(per.timePeriod.start) && ms < Date.parse(per.timePeriod.end)) {
+        return { text: per.regions[region].text, region };
+      }
+    }
+  }
+  return null;
+}
+
+// Which forecast covers a leave time. Each feed is null when its fetch failed.
+export function forecastForLeaveTime(
+  ms: number,
+  p: LatLng,
+  twoHr: { f: TwoHrFeed; r: Rainfall | null } | null,
+  day: Forecast24 | null,
+): LeaveForecast {
+  const win = twoHr?.f.items[0]?.valid_period;
+  if (twoHr && win && ms >= Date.parse(win.start) && ms < Date.parse(win.end)) {
+    const area = nearestArea(twoHr.f, p);
+    const rain = rainReport(area, twoHr.f, twoHr.r ?? { stations: [], readings: [] });
+    return { forecast: rain.forecast, wet: rain.raining, area, source: "two-hour" };
+  }
+  const hit = day && forecast24At(day, ms, p);
+  if (hit) return { forecast: hit.text, wet: forecastIsWet(hit.text), area: hit.region, source: "24-hour" };
+  // Both feeds answered but neither reaches the leave time: not out yet. Otherwise a feed is missing.
+  return twoHr && day
+    ? { forecast: "Forecast not out yet", wet: false, area: null, source: "none" }
+    : { forecast: "Forecast unavailable", wet: false, area: null, source: "unavailable" };
+}
+
+export async function fetchLeaveForecast(ms: number, lat: number, lng: number): Promise<LeaveForecast> {
+  const [f, r, day] = await Promise.all([
+    get<TwoHrFeed>("two-hr-forecast").catch(() => null),
+    get<Rainfall>("rainfall").catch(() => null),
+    get<Forecast24>("twenty-four-hr-forecast").catch(() => null),
+  ]);
+  return forecastForLeaveTime(ms, { latitude: lat, longitude: lng }, f && { f, r }, day);
+}

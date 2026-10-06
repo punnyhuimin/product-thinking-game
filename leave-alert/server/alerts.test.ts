@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { formatAlert, nextAlert, record } from "./alerts.ts";
+import { formatAlert, nextAlert, record, weatherLine } from "./alerts.ts";
 
 const min = 60_000;
 const now = Date.parse("2026-10-07T07:30:00+08:00");
@@ -28,10 +28,15 @@ test("go at leave time, then nothing more", () => {
 
 test("message mentions bus, umbrella and destination", () => {
   const text = formatAlert("headsUp", now + 8 * min, now, {
-    toLabel: "School", serviceNo: "15", busWaitMin: 6, forecast: "Showers", umbrella: true, mapsUrl: "https://maps.example/route",
+    toLabel: "School", serviceNo: "15", busWaitMin: 6, forecast: "Showers", forecastAt: now + 8 * min,
+    forecastArea: "Bishan", forecastSource: "two-hour", umbrella: true, mapsUrl: "https://maps.example/route",
   });
   assert.match(text, /Leave in 8 min \(07:38\) for School/);
   assert.match(text, /Bus 15 in 6 min/);
-  assert.match(text, /umbrella/);
+  assert.match(text, /Weather at 07:38: Showers\. Bring an umbrella\./);
   assert.match(text, /Route: https:\/\/maps\.example\/route/);
+});
+
+test("dry weather line has the leave time and no umbrella", () => {
+  assert.equal(weatherLine("Cloudy", now + 8 * min, false), "Weather at 07:38: Cloudy.");
 });

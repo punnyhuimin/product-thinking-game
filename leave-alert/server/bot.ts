@@ -1,4 +1,4 @@
-import { hhmm } from "./alerts.ts";
+import { hhmm, weatherLine } from "./alerts.ts";
 import type { Place } from "./route.ts";
 import type { Keyboard } from "./telegram.ts";
 import type { Trip, tripView } from "./trip.ts";
@@ -59,7 +59,7 @@ export function formatStatus(view: ReturnType<typeof tripView> | null): string {
   return [
     `${view.from.label} to ${view.to.label}`,
     `Arrive by ${hhmm(Date.parse(view.arriveBy))}, leave around ${hhmm(Date.parse(view.leaveAt))}.`,
-    `Weather: ${live.forecast}.${live.umbrella ? " Bring an umbrella." : ""}`,
+    weatherLine(live.forecast, Date.parse(live.forecastAt), live.umbrella),
   ].join("\n");
 }
 
