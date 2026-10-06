@@ -5,11 +5,22 @@ import { RouteMap } from "./RouteMap";
 
 type Props = { trip: TripView; onPlanAnother: () => void };
 
-function liveLine({ busWaitMin, forecast, umbrella }: TripView["live"]): string {
+function forecastPart({ forecast, forecastAt, forecastArea, forecastSource }: TripView["live"]): string | null {
+  if (forecastSource === "none") return "Forecast not out yet";
+  if (!forecast) return null;
+  // An older backend sends no source or time; keep the plain line.
+  if (!forecastSource || !forecastAt) return `Forecast: ${forecast}`;
+  const where = forecastArea ? ` (${forecastArea})` : "";
+  return `Forecast for ${formatSgTime(new Date(forecastAt))}${where}: ${forecast}`;
+}
+
+function liveLine(live: TripView["live"]): string {
+  const { busWaitMin, umbrella, forecastSource } = live;
   const parts: string[] = [];
   if (busWaitMin !== null) parts.push(busWaitMin <= 0 ? "Bus arriving now" : `Next bus in ${busWaitMin} min`);
-  if (forecast) parts.push(`Forecast: ${forecast}`);
-  if (umbrella) parts.push("Bring an umbrella");
+  const fc = forecastPart(live);
+  if (fc) parts.push(fc);
+  if (umbrella && forecastSource !== "none") parts.push("Bring an umbrella");
   return parts.join(" · ");
 }
 
