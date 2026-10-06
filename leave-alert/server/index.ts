@@ -1,11 +1,11 @@
 import { createHash } from "node:crypto";
 import { createServer, type IncomingMessage } from "node:http";
-import { createBot } from "./bot.ts";
+import { COMMANDS, createBot } from "./bot.ts";
 import { HEADS_UP_MIN, hhmm, weatherLine } from "./alerts.ts";
 import { signLink, verifyLink } from "./link.ts";
 import { getToken, route, search } from "./onemap.ts";
 import { staticMapUrl } from "./staticMap.ts";
-import { answerCallback, editMessage, getUpdates, sendMessage, sendPhoto, setWebhook, type Update } from "./telegram.ts";
+import { answerCallback, editMessage, getUpdates, sendMessage, sendPhoto, setMyCommands, setWebhook, type Update } from "./telegram.ts";
 import { checkTrip, parseTrip, tripView } from "./trip.ts";
 import { createTrips } from "./trips.ts";
 
@@ -168,6 +168,8 @@ createServer(async (req, res) => {
 }).listen(PORT, () => console.log(`leave-alert server on http://localhost:${PORT}`));
 
 setInterval(() => void trips.tick(), POLL_MS);
+
+setMyCommands(BOT_TOKEN, COMMANDS).catch((e) => console.error("setMyCommands failed:", e.message));
 
 if (PUBLIC_URL) {
   setWebhook(BOT_TOKEN, PUBLIC_URL + HOOK_PATH, HOOK_SECRET)
