@@ -28,9 +28,10 @@ test("go at leave time, then nothing more", () => {
 
 test("message mentions bus, umbrella and destination", () => {
   const text = formatAlert("headsUp", now + 8 * min, now, {
-    toLabel: "School", serviceNo: "15", busWaitMin: 6, forecast: "Showers", umbrella: true,
+    toLabel: "School", serviceNo: "15", busWaitMin: 6, forecast: "Showers", umbrella: true, mapsUrl: "https://maps.example/route",
   });
   assert.match(text, /Leave in 8 min \(07:38\) for School/);
   assert.match(text, /Bus 15 in 6 min/);
   assert.match(text, /umbrella/);
+  assert.match(text, /Route: https:\/\/maps\.example\/route/);
 });

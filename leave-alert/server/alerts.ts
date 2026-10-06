@@ -25,6 +25,7 @@ export type Context = {
   busWaitMin: number | null;
   forecast: string;
   umbrella: boolean;
+  mapsUrl: string;
 };
 
 export const hhmm = (ms: number) =>
@@ -39,5 +40,5 @@ export function formatAlert(kind: AlertKind, leaveAt: number, now: number, c: Co
   }[kind];
   const bus = c.busWaitMin === null ? `No live arrival for bus ${c.serviceNo}.` : `Bus ${c.serviceNo} in ${c.busWaitMin} min.`;
   const rain = c.umbrella ? `Weather: ${c.forecast}. Bring an umbrella.` : `Weather: ${c.forecast}.`;
-  return [head, bus, rain].join("\n");
+  return [head, bus, rain, `Route: ${c.mapsUrl}`].join("\n");
 }

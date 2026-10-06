@@ -2,6 +2,7 @@ import { computeLeaveTime, type LeavePlan } from "./leaveTime.ts";
 import { busWaitMin } from "./lta.ts";
 import { firstTransit, type Place, type Route } from "./route.ts";
 import { fetchRainNear } from "./weather.ts";
+import { googleMapsUrl } from "./googleMaps.ts";
 import type { Context } from "./alerts.ts";
 
 // Matches the POST /api/trip payload from web/.
@@ -53,6 +54,7 @@ export async function checkTrip(trip: ActiveTrip, ltaKey: string, now = new Date
     busWaitMin: live,
     forecast: rain.forecast,
     umbrella: plan.umbrella,
+    mapsUrl: googleMapsUrl(trip.from, trip.to),
   };
   return { plan, context, checkedAt: now.getTime() };
 }
