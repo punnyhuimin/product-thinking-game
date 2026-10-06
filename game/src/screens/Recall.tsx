@@ -6,11 +6,10 @@ import { MultiChoice } from "../components/MultiChoice";
 export function Recall({ level, onDone }: { level: number; onDone: () => void }) {
   const qs = RECALL[level] ?? [];
   const [i, setI] = useState(0);
-  if (i >= qs.length) { onDone(); return null; }
   return (
     <div className="card">
       <p className="kicker">Warm-up · from the last level</p>
-      <MultiChoice key={i} q={qs[i]} onNext={() => setI(i + 1)} nextLabel={i + 1 < qs.length ? "Next" : "Start level"} />
+      <MultiChoice key={i} q={qs[i]} onNext={() => (i + 1 < qs.length ? setI(i + 1) : onDone())} nextLabel={i + 1 < qs.length ? "Next" : "Start level"} />
     </div>
   );
 }
