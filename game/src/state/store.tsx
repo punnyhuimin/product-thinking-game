@@ -8,6 +8,7 @@ export interface GameState {
   hearts: number;
   completed: Record<number, number>; // level id -> stars (1-3)
   recallDone: Record<number, boolean>;
+  puzzles: Record<string, number>; // puzzle id -> stars (1-3)
 }
 
 export type Action =
@@ -16,18 +17,21 @@ export type Action =
   | { type: "refill-hearts" }
   | { type: "complete"; level: number; stars: number }
   | { type: "recall-done"; level: number }
+  | { type: "puzzle-done"; id: string; stars: number }
   | { type: "reset" };
 
-const initial: GameState = { xp: 0, hearts: MAX_HEARTS, completed: {}, recallDone: {} };
+const initial: GameState = { xp: 0, hearts: MAX_HEARTS, completed: {}, recallDone: {}, puzzles: {} };
 
 function reducer(s: GameState, a: Action): GameState {
   switch (a.type) {
-    case "xp": return { ...s, xp: s.xp + a.amount };
+    case "xp": return { ...s, xp: Math.max(0, s.xp + a.amount) };
     case "lose-heart": return { ...s, hearts: Math.max(0, s.hearts - 1) };
     case "refill-hearts": return { ...s, hearts: MAX_HEARTS };
     case "complete":
       return { ...s, completed: { ...s.completed, [a.level]: Math.max(s.completed[a.level] ?? 0, a.stars) } };
     case "recall-done": return { ...s, recallDone: { ...s.recallDone, [a.level]: true } };
+    case "puzzle-done":
+      return { ...s, puzzles: { ...s.puzzles, [a.id]: Math.max(s.puzzles[a.id] ?? 0, a.stars) } };
     case "reset": return initial;
   }
 }

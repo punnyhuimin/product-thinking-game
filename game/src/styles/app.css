@@ -68,3 +68,18 @@ kbd { font-family: var(--sans); font-size: .65rem; opacity: .7; border: 1px soli
 .muted { color: var(--muted); font-family: var(--sans); font-size: .7rem; }
 .criteria { list-style: none; padding: 0; font-size: .9rem; }
 .criteria li { margin: .3rem 0; }
+.web { position: relative; margin: .8rem 0; }
+.web-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.web-lines line { stroke-width: 2; }
+.web-lines line.hot { stroke: var(--bad); color: var(--bad); }
+.web-lines line.cool { stroke: var(--good); color: var(--good); opacity: .6; }
+.wnode { position: absolute; transform: translate(-50%, -50%); width: 22%; min-height: 3.2rem; padding: .3rem .35rem; font-family: var(--sans); font-size: .62rem; line-height: 1.25; border-radius: 8px; border: 2px solid var(--rule); background: var(--card); color: var(--fg); cursor: pointer; transition: background .2s, border-color .2s, transform .15s; }
+.wnode:hover { transform: translate(-50%, -50%) scale(1.04); }
+.wnode.on { border-color: var(--bad); background: var(--bad-soft); }
+.wnode.off { border-color: var(--good); background: var(--good-soft); opacity: .85; }
+.wnode.fixed { border-color: var(--good); background: var(--good); color: #fff; }
+.wnode.locked { cursor: not-allowed; border-style: dashed; }
+.wnode.symptom { font-weight: 700; }
+.wnode.hinted { box-shadow: 0 0 0 3px var(--accent); animation: pulse 1s infinite alternate; }
+@keyframes pulse { to { box-shadow: 0 0 0 6px var(--accent-soft); } }
+@media (max-width: 420px) { .wnode { font-size: .55rem; width: 23.5%; } }
