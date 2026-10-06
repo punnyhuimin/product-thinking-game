@@ -61,3 +61,8 @@ kbd { font-family: var(--sans); font-size: .65rem; opacity: .7; border: 1px soli
 .bar { height: 1.1rem; background: var(--rule); border-radius: 4px; overflow: hidden; }
 .bar > div { height: 100%; background: var(--muted); }
 .bar > div.t { background: var(--good); }
+.star-big { color: var(--accent); font-size: 1.1rem; letter-spacing: .1em; margin: .5rem 0; word-break: break-all; }
+.cost { height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; margin: .5rem 0; }
+.cost > div { height: 100%; background: var(--good); transition: width .2s; }
+.cost > div.over { background: var(--bad); }
+.muted { color: var(--muted); font-family: var(--sans); font-size: .7rem; }
